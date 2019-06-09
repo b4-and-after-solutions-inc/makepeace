@@ -26,6 +26,13 @@ class Admin extends CI_Controller
     $this->load->view('admin/includes/cifoot');
   }
 
+  public function orders(){
+    $cihead['Menu1'] = 'orders';
+    $cihead['category'] = $this->records_model->get_categories();
+    $this->load->view('admin/includes/cihead', $cihead);
+    $this->load->view('admin/orders');
+    $this->load->view('admin/includes/cifoot');
+  }
   function get_products(){
     $this->output
         ->set_content_type("application/json")
@@ -41,11 +48,19 @@ class Admin extends CI_Controller
         ->set_content_type("application/json")
         ->set_output(json_encode($this->records_model->get_categories()));
   }
-  function save_product(){
-      $this->records_model->save_product($this->input->post());
+  function save(){
+      $this->records_model->save($this->input->post());
+  }
+  function get_orders(){
+    if($this->session->userdata('id')){
+      $this->output
+        ->set_content_type("application/json")
+        ->set_output(json_encode($this->records_model->get_orders()));
+    }
+    else return 'Unauthorized Access';
   }
   function save_slider(){
-      $this->records_model->save_slider ($this->input->post());
+      $this->records_model->save_slider($this->input->post());
   }
   function get_sliders(){
     $this->output

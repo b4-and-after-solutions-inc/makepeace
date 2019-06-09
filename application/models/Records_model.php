@@ -8,11 +8,11 @@ Class records_model extends CI_Model{
 	  return $this->db->query("SELECT `id`, `name`, `description`, `pic`, `price`, `category_id`, `is_featured`, `active` FROM `products` WHERE is_featured = 1")->result();
 	}
 	function get_sliders($post, $active){
-	  if($active = 1) {
+	  if($active == 1) {
 	  	$where = 'WHERE ACTIVE = 1';
 	  }
 	  else {
-	  	$where = '';	
+	  	$where = '';
 	  }
 	  if(is_null($post)){
 	  	return $this->db->query("SELECT `id`, `title`, `body`, `picture`, Coalesce(`link_title`, '') `link_title`, Coalesce(`link`, '') link, `active` FROM `home_slider` $where ORDER BY active desc")->result();
@@ -27,6 +27,9 @@ Class records_model extends CI_Model{
 	function get_categories(){
 	  return $this->db->query("SELECT `id`, `category`, `color_class` FROM `categories`")->result();
 	}
+	function get_orders(){
+	  return $this->db->query("SELECT `id`, `customer_name`, `contact_number`, `email_address`, `order_status`, `created_datetime` FROM `order_header`")->result();
+	}
 	function get_product($id){
 	  return $this->db->query("SELECT `id`, `name`, `description`, `pic`, `price`, `category_id`, `is_featured`, `active` FROM `products` WHERE id = ?", array($id))
 	  			  ->row_array();
@@ -39,7 +42,7 @@ Class records_model extends CI_Model{
 	  	return array('products' => $this->get_products(), 'count' => $this->get_total_products(), 'featured'=> $this->get_featured_products());
 	}
 
-	function save_product($post){
+	function save($post){
 		$act = $post['action'];
 		unset($post['action']);
 		switch ($act) {
@@ -53,16 +56,27 @@ Class records_model extends CI_Model{
 					unset($post['pic']);
 				}
 				else{
-					$post['pic'] = $this->upload_file($_FILES['pic']);
+					$post['pic'] = $this->upload_file(0,$_FILES['pic']);
 				}
 				$this->db->where('id', $post['id'])
 						 ->update('products', $post);
 			break;
+			case 'edit_slide':
+				if(!isset($_FILES['pic'])){
+					unset($post['pic']);
+				}
+				else{
+					$post['picture'] = $this->upload_file(1,$_FILES['pic']);
+				}
+				$this->db->where('id', $post['id'])
+						 ->update('home_slider', $post);
+			break;
 		}
 	}
-	function upload_file(){
+	function upload_file($action){
+		$path = $action == 1?'slider':'products';
 		$config = array(
-		'upload_path' => "./uploads/products/",
+		'upload_path' => "./uploads/$path/",
 		'allowed_types' => "jpg|png|jpeg",
 		'overwrite' => TRUE,
 		'max_size' => "10048000"

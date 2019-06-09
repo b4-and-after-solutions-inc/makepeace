@@ -39,7 +39,7 @@
             <span aria-hidden="true">&times;</span></button>
           <h4 id="modal-title" class="modal-title">Default Modal</h4>
         </div>
-        <form id="product_form" method="post" action="<?php echo base_url()?>Admin/save_product" enctype="multipart/form-data">
+        <form id="product_form" method="post" action="<?php echo base_url()?>Admin/save" enctype="multipart/form-data">
         <div class="modal-body" id="modal-body">
             <div class="row">
               <div class="col-md-6">
@@ -160,7 +160,7 @@ function edit_mode(id){
 }
 function toggle_stat(act){
   $.ajax({
-    url: base_url + 'Admin/save_product',
+    url: base_url + 'Admin/save',
     data:  {id: $('#product_id').val(), active: act, action: $('#modal_action').val()},
     type: 'POST',
     async: false,
@@ -172,7 +172,7 @@ function toggle_stat(act){
 }
 function toggle_feat(id, act){
   $.ajax({
-    url: base_url + 'Admin/save_product',
+    url: base_url + 'Admin/save',
     data:  {id: id, is_featured: act, action: 'edit'},
     type: 'POST',
     async: false,
@@ -234,7 +234,7 @@ $("#product_form").on('submit',(function(e) {
     fd.append('id', $('#product_id').val());
     fd.append('action', $('#modal_action').val());
     $.ajax({
-      url: base_url + 'Admin/save_product',
+      url: base_url + 'Admin/save',
       data:  fd,
       type: 'POST',
       contentType: false,

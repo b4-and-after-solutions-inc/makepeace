@@ -87,13 +87,13 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="<?php echo base_url('assets/admin/img/users/'); ?>JDC.png" class="user-image" alt="User Image">
-						<span class="hidden-xs">Temporary Name</span><!-- TODO Change to Logged In Name -->
+						<span class="hidden-xs"><?=$this->session->userdata('name');?></span><!-- TODO Change to Logged In Name -->
 					</a>
 
 				<ul class="dropdown-menu">
 					<li class="user-header">
 						<img src="<?php echo base_url('assets/admin/img/users/'.'JDC.png'); ?>" class="img-circle" alt="User Image">
-						<p>Temporary Name <small>Temporary User</small></p><!-- TODO Change User Information to get via SESSION -->
+						<p><?=$this->session->userdata('name');?> <small>Administrator</small></p><!-- TODO Change User Information to get via SESSION -->
 					</li>
 
 					<li class="user-footer">
@@ -400,7 +400,9 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header">MAIN MENU</li><!-- TODO Dynamic Highlighting of Menu -->
+			<li class="<?=($Menu1=='orders'?'active':'');?>"><a href="<?=base_url();?>Admin/orders"><i class="glyphicon glyphicon-send"></i> <span>Orders</span></a></li>
 			<li class="<?=($Menu1=='Dashboard'?'active':'');?>"><a href="<?=base_url();?>Admin"><i class="glyphicon glyphicon-apple"></i> <span>Products</span></a></li>
+			
 			<li class="<?=($Menu1=='settings'?'active':'');?>"><a href="<?=base_url();?>Admin/settings"><i class="glyphicon glyphicon-wrench"></i> <span>Settings</span></a></li>
 		
 		</ul>

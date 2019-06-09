@@ -47,7 +47,7 @@
             <span aria-hidden="true">&times;</span></button>
           <h4 id="modal-title" class="modal-title">Default Modal</h4>
         </div>
-        <form id="slide_form" method="post" action="<?php echo base_url()?>Admin/save_slide" enctype="multipart/form-data">
+        <form id="slide_form" method="post" action="<?php echo base_url()?>Admin/save" enctype="multipart/form-data">
         <div class="modal-body" id="modal-body">
             <div class="row">
               <div class="col-md-6">
@@ -56,7 +56,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-control-label">Image</label>
-                <input class="form-control" type="file" id="image">
+                <input class="form-control" type="file" accept="image/png, image/jpeg" id="image">
               </div>
             </div>
             <br>
@@ -106,6 +106,7 @@ function edit_mode(id){
     async: false,
     success: function(d){
       $('#slide').val(d.title);
+      $('#slide_title').val(d.title);
       $('#slide_description').val(d.body);
       $('#slide_button').val(d.link_title);
       $('#link').val(d.link);
@@ -133,8 +134,8 @@ function edit_mode(id){
 }
 function toggle_stat(act){
   $.ajax({
-    url: base_url + 'Admin/save_slide',
-    data:  {id: $('#slide_id').val(), active: act, action: $('#modal_action').val()},
+    url: base_url + 'Admin/save',
+    data:  {id: $('#slide_id').val(), active: act, action: 'edit_slide'},
     type: 'POST',
     async: false,
     success: function(){
@@ -172,30 +173,25 @@ function get_slider(){
 
 $("#slide_form").on('submit',(function(e) {
   e.preventDefault();
-  if($("#image").val() == 0 && $('#modal_action').val() == 'add'){
-    alert('Please select an image file.');
-  }
-  else{
-    var fd = new FormData();    
-    fd.append('pic', $('#image')[0].files[0]);
-    fd.append('name', $('#slide').val());
-    fd.append('description', $('#description').val());
-    fd.append('price', $('#slide_button').val());
-    fd.append('category', $('#category').val());
-    fd.append('id', $('#slide_id').val());
-    fd.append('action', $('#modal_action').val());
-    $.ajax({
-      url: base_url + 'Admin/save_slider',
-      data:  fd,
-      type: 'POST',
-      contentType: false,
-      processData: false,
-      async: false,
-      success: function(){
-        get_slides();
-        $('#modal-default').modal('hide');
-      }
-    });
-  }
+  var fd = new FormData();    
+  fd.append('pic', $('#image')[0].files[0]);
+  fd.append('title', $('#slide_title').val());
+  fd.append('body', $('#slide_description').val());
+  fd.append('link_title', $('#slide_button').val());
+  fd.append('link', $('#link').val());
+  fd.append('id', $('#slide_id').val());
+  fd.append('action', 'edit_slide');
+  $.ajax({
+    url: base_url + 'Admin/save',
+    data:  fd,
+    type: 'POST',
+    contentType: false,
+    processData: false,
+    async: false,
+    success: function(){
+      $('#modal-default').modal('hide');
+      get_slider();
+    }
+  });
 }));
 </script>
