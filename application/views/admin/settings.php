@@ -8,26 +8,32 @@
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
     <div class="col-md-12">
         <label class="form-control-label">Current Password</label>
-        <input type="text" class="form-control">
+        <input id="oldPassword" type="text" class="form-control">
     </div>
     <div class="col-md-12">
         <label class="form-control-label">New Password</label>
-        <input type="text" class="form-control">
+        <input id ="newPassword" type="text" class="form-control">
     </div>
     <div class="col-md-12">
         <label class="form-control-label">Retype New Password</label>
-        <input type="text" class="form-control">
+        <input id="retypenewPassword" type="text" class="form-control">
     </div>
+
+    
   </div>
 
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
     <div class="col-md-12">
         <label class="form-control-label">Email</label>
-        <input type="text" class="form-control" value="ejwpascual@gmail.com" disabled="">
+        <input id="userEmail" type="text" class="form-control" value="ejwpascual@gmail.com" disabled="">
     </div>
     <div class="col-md-12">
         <label class="form-control-label">Email Password</label>
-        <input type="text" class="form-control">
+        <input id="userEmailPassword" type="text" class="form-control">
+    </div>
+    <div class="col-md-12 text-right">
+        <br>
+        <button type="button" class="btn btn-primary text-sm" onclick="edit_credentials()">Save</button>
     </div>
   </div>
 </div>
@@ -194,4 +200,9 @@ $("#slide_form").on('submit',(function(e) {
     }
   });
 }));
+
+function edit_credentials(){
+
+
+}
 </script>
