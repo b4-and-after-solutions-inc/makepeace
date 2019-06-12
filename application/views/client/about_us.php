@@ -32,13 +32,13 @@
               <div class="tab-content tab-content-1">
                 <div class="tab-pane fade show active" id="tabs-4-1">
                   <h4>a few words about us</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p><img src="<?=base_url('assets/');?>images/about-1-835x418.jpg" alt="" width="835" height="418"/>
+                  <p>We partner with the community to build their bakery, we train their youth bakers to run and develop products under The Make Peace Bakery management, in this way we help them grow their bakery and make sure that they profit from it equally.</p>
+                  <p>“We go to the hard to reach and most untapped places in the country to identify the most deserving youth to undergo the free baking skills and product development program.”</p><img src="<?=base_url('assets/');?>images/about-1-835x418.jpg" alt="" width="835" height="418"/>
                 </div>
                 <div class="tab-pane fade" id="tabs-4-2">
-                  <h4>Offering the Best Pizza in Los Angeles</h4>
-                  <p>Lotus advenas ducunt ad gemna. Ubi est domesticus domina? Heu, barbatus mens! Cum elogium favere, omnes lubaes tractare talis, barbatus adiuratores. Mirabilis hydras ducunt ad danista. Dominas sunt accentors de germanus cacula. Amicitias prarere in alta muta! Ecce, bubo! Nunquam promissio verpa. Talis, primus fugas recte consumere de audax, festus indictio. Nunquam quaestio scutum. Valebats</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><img src="<?=base_url('assets/');?>images/about-1-835x418.jpg" alt="" width="835" height="418"/>
+                  <h4>THE MAKE PEACE BAKERY</h4>
+                  <p>Our mission is to build lasting partnerships amongst communities in building their cooperative community bakery.</p>
+                  <p>“We create baking communities in rural and urban places in the Philippines, tapping the out of school and underprivileged youth to learn baking,and product development. These bakeries will serve its own community offering healthy,fresh and affordable breads to its people.”</p><img src="<?=base_url('assets/');?>images/about-1-835x418.jpg" alt="" width="835" height="418"/>
                 </div>
                 <div class="tab-pane fade" id="tabs-4-3">
                   <h4>Providing Top-notch Customer Service</h4>
@@ -51,53 +51,6 @@
                   <p>Lotus advenas ducunt ad gemna. Ubi est domesticus domina? Heu, barbatus mens! Cum elogium favere, omnes lubaes tractare talis, barbatus adiuratores. Mirabilis hydras ducunt ad danista. Dominas sunt accentors de germanus cacula. Amicitias prarere in alta muta! Ecce, bubo! Nunquam promissio verpa. Talis, primus fugas recte consumere de audax, festus indictio. Nunquam quaestio scutum. Valebats</p><img src="<?=base_url('assets/');?>images/about-1-835x418.jpg" alt="" width="835" height="418"/>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Icon Classic-->
-      <section class="section section-lg bg-gray-100">
-        <div class="container">
-          <div class="row row-md row-50">
-            <div class="col-sm-6 col-xl-4 wow fadeInUp" data-wow-delay="0s">
-              <article class="box-icon-classic">
-                <div class="unit unit-spacing-lg flex-column text-center flex-md-row text-md-left">
-                  <div class="unit-left">
-                    <div class="box-icon-classic-icon linearicons-helicopter"></div>
-                  </div>
-                  <div class="unit-body">
-                    <h5 class="box-icon-classic-title"><a href="#">Free Delivery</a></h5>
-                    <p class="box-icon-classic-text">Lotus advenas ducunt ad gemna. Ubi est domesticus domina heu.</p>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-xl-4 wow fadeInUp" data-wow-delay=".1s">
-              <article class="box-icon-classic">
-                <div class="unit unit-spacing-lg flex-column text-center flex-md-row text-md-left">
-                  <div class="unit-left">
-                    <div class="box-icon-classic-icon linearicons-pizza"></div>
-                  </div>
-                  <div class="unit-body">
-                    <h5 class="box-icon-classic-title"><a href="#">20+ Pizza Options</a></h5>
-                    <p class="box-icon-classic-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-sm-6 col-xl-4 wow fadeInUp" data-wow-delay=".2s">
-              <article class="box-icon-classic">
-                <div class="unit unit-spacing-lg flex-column text-center flex-md-row text-md-left">
-                  <div class="unit-left">
-                    <div class="box-icon-classic-icon linearicons-leaf"></div>
-                  </div>
-                  <div class="unit-body">
-                    <h5 class="box-icon-classic-title"><a href="#">Fresh Ingredients</a></h5>
-                    <p class="box-icon-classic-text">Albus, dexter particulas grauiter consumere de ferox, bi-color abactus.</p>
-                  </div>
-                </div>
-              </article>
             </div>
           </div>
         </div>

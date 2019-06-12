@@ -25,12 +25,14 @@ class Bakery extends CI_Controller {
 		$this->load->view('client/includes/footer');
 	}
 	
-	public function typography()
+	public function products()
 	{
-		$data['nav'] = "Typography";
+		$data['nav'] = "Products";
+		$data['product_list'] = $this->records_model->get_products();
+		$data['category_list'] = $this->records_model->get_categories();
 		
 		$this->load->view('client/includes/header', $data);
-		$this->load->view('client/typography');
+		$this->load->view('client/products');
 		$this->load->view('client/includes/footer');
 	}
 	
