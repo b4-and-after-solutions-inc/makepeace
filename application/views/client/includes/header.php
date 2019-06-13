@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="<?=base_url('assets/client/css/fonts.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/style.css')?>">
 	
+	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
+	<script src="<?=base_url('assets/client/js/bootstrap-input-spinner.js');?>"></script>
+	
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -59,7 +62,7 @@
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-modern" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="56px" data-xl-stick-up-offset="56px" data-xxl-stick-up-offset="56px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-inner-outer" style="background:#896241">
+            <div class="rd-navbar-inner-outer">
               <div class="rd-navbar-inner">
                 <!-- RD Navbar Panel-->
                 <div class="rd-navbar-panel">
@@ -98,7 +101,7 @@
                       </li>
                       <li class="rd-nav-item <?php echo ($nav == "About Us") ? "active" : " ";?>"><a class="rd-nav-link" href="<?=base_url('Bakery/about_us')?>">About us</a>
                       </li>
-                      <li class="rd-nav-item <?php echo ($nav == "Typography") ? "active" : " ";?>"><a class="rd-nav-link" href="<?=base_url('Bakery/products')?>">Products</a>
+                      <li class="rd-nav-item <?php echo ($nav == "Products") ? "active" : " ";?>"><a class="rd-nav-link" href="<?=base_url('Bakery/products')?>">Products</a>
                       </li>
                       <li class="rd-nav-item <?php echo ($nav == "Contacts") ? "active" : " ";?>"><a class="rd-nav-link" href="<?=base_url('Bakery/contacts')?>">Contacts</a>
                       </li>
@@ -117,10 +120,21 @@
                     </div>
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
-                    <div>
-                      <div class="row gutters-20" data-lightgallery="group">
-						<!-- TODO Cart -->
+                    <div class="text-right">
+                      <div class="row gutters-20 cart-list" data-lightgallery="group">
+						<div class="col-12 row">
+							<div class="col-6 text-left">
+								Cart Item
+							</div>
+							<div class="col-3 text-left">
+								Quantity
+							</div>
+							<div class="col-3">
+								
+							</div>
+                        </div>
                       </div>
+					  <button type="button" class="btn btn-primary btn-sm">Checkout</button>
                     </div>
                   </div>
                 </div>
