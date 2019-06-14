@@ -31,6 +31,13 @@
   		  min-width:2em;
   		  font-weight:bold;
   		}
+
+      .def-number-input{
+         display:flex;
+       }
+       .def-number-input button{
+         height: 100%;
+       }
   	</style>
 
 	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
@@ -129,7 +136,7 @@
                 </div>
                 <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1 mr-3" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
                   <span class="fa-stack has-badge">
-                    <div class="project-hamburger" ><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
+                    <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
                     </div>
         				  </span>
                 </div>
