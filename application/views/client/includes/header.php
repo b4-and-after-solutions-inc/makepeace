@@ -13,10 +13,18 @@
     <link rel="stylesheet" href="<?=base_url('assets/client/css/bootstrap.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/fonts.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/style.css')?>">
-	
+
 	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
 	<script src="<?=base_url('assets/client/js/bootstrap-input-spinner.js');?>"></script>
-	
+	<style>
+  .def-number-input{
+    display:flex;
+  }
+  .def-number-input button{
+    height: 100%;
+    background-color: #ccd464;
+  }
+  </style>
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -112,12 +120,13 @@
                   <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
                   </div>
                 </div>
-                <div class="rd-navbar-project">
-                  <div class="rd-navbar-project-header">
-                    <h5 class="rd-navbar-project-title">Cart</h5>
+                <div class="rd-navbar-project" style="padding-top: 1rem;">
+                  <div class="rd-navbar-project-header" style="display:flex">
                     <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-close" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
                       <div class="project-close"><span></span><span></span></div>
                     </div>
+                    <h5 class="rd-navbar-project-title">Cart</h5>
+                    <button type="button" class="btn btn-primary btn-sm" style="position:fixed; right:20px; padding: .5em 1.5rem;">Checkout</button>
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
                     <div class="text-right">
@@ -130,11 +139,10 @@
 								Quantity
 							</div>
 							<div class="col-3">
-								
+
 							</div>
                         </div>
                       </div>
-					  <button type="button" class="btn btn-primary btn-sm">Checkout</button>
                     </div>
                   </div>
                 </div>
