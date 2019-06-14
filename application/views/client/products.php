@@ -14,7 +14,7 @@
           </ul>
         </div>
       </section>
-	  
+
 	  <!-- Our Shop-->
       <section class="section section-lg bg-default">
         <div class="container">
@@ -25,9 +25,10 @@
 			  <!--Category Tabs-->
 			  <?php
 				foreach($category_list as $catlist){
+          $clean_name = explode(" ", $catlist->category, 2);
 					echo '
 					  <li class="nav-item">
-						<a class="nav-link" id="'.$catlist->category.'-tab" data-toggle="tab" href="#'.$catlist->category.'" role="tab">'.$catlist->category.'</a>
+						<a class="nav-link" id="'.$catlist->category.'-tab" data-toggle="tab" href="#'.$clean_name[0].'" role="tab">'.$catlist->category.'</a>
 					  </li>
 					';
 				}
@@ -62,15 +63,16 @@
 			  <!--Per Category panel-->
 			  <?php
 				foreach($category_list as $catlist){
+          $clean_name = explode(" ", $catlist->category, 2);
 					echo '
-						<div class="tab-pane fade" id="'.$catlist->category.'" role="tabpanel" aria-labelledby="'.$catlist->category.'-tab"><div class="row row-lg row-30">
+						<div class="tab-pane fade" id="'.$clean_name[0].'" role="tabpanel" aria-labelledby="'.$catlist->category.'-tab"><div class="row row-lg row-30">
 					';
 					foreach($product_list as $list){
 						if($catlist->id == $list->category_id){
 							echo '
 								<div class="col-sm-6 col-lg-4 col-xl-3">
 								  <!-- Product-->
-								  <article class="product wow fadeInLeft" data-wow-delay=".15s">
+								  <article class="product">
 									<div class="product-figure"><img src="'. base_url() .'assets/admin/img/gallery/'.$list->pic.'" alt="" width="161" height="162"/>
 									</div>
 									<h6 class="product-title">'.$list->name.'</h6>
@@ -142,13 +144,13 @@
 <script>
 	var product_list = <?php echo json_encode($product_list);?>;
 	var cart = new Array();
-	
-	
+
+
 	$(document).on('click', '#view_product',function(){
-		
+
 		var id = $(this).val();
 		var index = product_list.findIndex(product_list => product_list.id == id);
-		
+
 		var prod_name = product_list[index]['name'],
 			prod_price = product_list[index]['price'],
 			description = product_list[index]['description'],
@@ -163,41 +165,49 @@
 		$('#product-add').val(id);
 
 		$('#product_description').modal('show');
-		
-		
+
+
 	});
-	
+
 	$(document).on('click', '#product-add',function(){
 		var id = $(this).val();
-		
+
 		var index = product_list.findIndex(product_list => product_list.id == id);
 		var check_cart = cart.findIndex(cart => cart.product_details.id == id);
-		
+
 		var quantity = $('#product-quantity').val();
-		
+
 		if(check_cart == -1){
 			cart.push({product_details: product_list[index], quantity: quantity});
 			print_cart(product_list, quantity, index);
 		}
+    if(cart.length != 0){
+      if(!$('.has-badge').hasClass("data-count")){
+        $('.has-badge').addClass("data-count");
+      }
+      $('.has-badge').attr("data-count", cart.length);
+    } else {
+      $('.has-badge').removeClass("data-count");
+    }
 		$('#product_description').modal('hide');
 	});
-	
+
 	function print_cart(cart, quantity, index){
 		var cart_item = "<div class='col-12 row'><div class='col-6 text-left'>"+cart[index]['name']+"</div><div class='col-3 text-left'>"+quantity+"</div><div class='col-3'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true'>&times;</span></button></div></div>";
-		
+
 		$('.cart-list').append(cart_item);
 	}
-	
-	
+
+
 	$(document).on('click', '.close', function(){
 		var id = $(this).val();
-		
+
 		var check_cart = cart.findIndex(cart => cart.product_details.id == id);
-		
+
 		cart.splice(check_cart, 1);
-		
+
 		$(this).closest('.row').remove();
-		
+
 		console.log(cart);
 	});
 </script>

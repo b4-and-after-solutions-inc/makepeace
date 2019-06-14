@@ -13,10 +13,29 @@
     <link rel="stylesheet" href="<?=base_url('assets/client/css/bootstrap.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/fonts.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/style.css')?>">
-	
+
+    <!--Cart Notification Style-->
+  	<style>
+  		.fa-stack[data-count]:after{
+  		  position:absolute;
+  		  right:-20%;
+  		  top:-40%;
+  		  content: attr(data-count);
+  		  font-size: 60%;
+  		  padding:.6em;
+  		  border-radius:999px;
+  		  line-height:.75em;
+  		  color: white;
+  		  background:rgba(255,0,0,.85);
+  		  text-align:center;
+  		  min-width:2em;
+  		  font-weight:bold;
+  		}
+  	</style>
+
 	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
-	<script src="<?=base_url('assets/client/js/bootstrap-input-spinner.js');?>"></script>
-	
+
+
     <!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
@@ -108,9 +127,11 @@
                     </ul>
                   </div>
                 </div>
-                <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
-                  <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
-                  </div>
+                <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1 mr-3" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
+                  <span class="fa-stack has-badge">
+                    <div class="project-hamburger" ><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
+                    </div>
+        				  </span>
                 </div>
                 <div class="rd-navbar-project">
                   <div class="rd-navbar-project-header">
@@ -130,7 +151,7 @@
 								Quantity
 							</div>
 							<div class="col-3">
-								
+
 							</div>
                         </div>
                       </div>
