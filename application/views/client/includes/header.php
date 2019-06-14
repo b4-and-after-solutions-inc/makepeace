@@ -31,14 +31,6 @@
   		  min-width:2em;
   		  font-weight:bold;
   		}
-
-      .def-number-input{
-        display:flex;
-      }
-      .def-number-input button{
-        height: 100%;
-        background-color: #ccd464;
-      }
   	</style>
 
 	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
