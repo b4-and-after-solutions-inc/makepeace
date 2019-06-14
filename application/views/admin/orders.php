@@ -32,7 +32,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 id="modal-title" class="modal-title">Default Modal</h4>
+          <h4 id="modal-title" class="modal-title">Default Modals</h4>
         </div>
         <form id="slide_form" method="post" action="<?php echo base_url()?>Admin/save" enctype="multipart/form-data">
         <div class="modal-body" id="modal-body">
