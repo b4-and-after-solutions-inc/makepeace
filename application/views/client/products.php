@@ -44,7 +44,7 @@
 							<div class="col-sm-6 col-lg-4 col-xl-3">
 							  <!-- Product-->
 							  <article class="product wow fadeInLeft" data-wow-delay=".15s">
-								<div class="product-figure"><img src="'. base_url() .'assets/admin/img/gallery/'.$list->pic.'" alt="" width="161" height="162"/>
+								<div class="product-figure"><img src="'. base_url() .'uploads/products/'.$list->pic.'" alt="" height="175" width="200"/>
 								</div>
 								<h6 class="product-title">'.$list->name.'</h6>
 								<div class="product-price-wrap">
@@ -62,6 +62,7 @@
 			  </div>
 			  <!--Per Category panel-->
 			  <?php
+
 				foreach($category_list as $catlist){
           $clean_name = explode(" ", $catlist->category, 2);
 					echo '
@@ -69,6 +70,7 @@
 					';
 					foreach($product_list as $list){
 						if($catlist->id == $list->category_id){
+              $match = 1;
 							echo '
 								<div class="col-sm-6 col-lg-4 col-xl-3">
 								  <!-- Product-->
@@ -87,7 +89,6 @@
 							';
 						}
 					}
-					echo '</div></div>';
 				}
 			  ?>
 			</div>
@@ -119,13 +120,15 @@
 							</span>
 						</h6>
 						<p id="product-desc"></p>
-						<div class="row">
-							Quantity:
-							<div class="def-number-input number-input safari_only">
-							  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-							  <input type="number" id="product-quantity" value="1" min="1"/>
-							  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-							</div>
+            <p>Quantity:</p>
+						<div class="row" style="margin-top:0;">
+              <div class="row" style="margin:auto">
+  							<div class="def-number-input number-input safari_only">
+  							  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+  							  <input type="number" id="product-quantity" value="1" min="1"/>
+  							  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+  							</div>
+              </div>
 						</div>
 					</div>
 				</div>
@@ -154,7 +157,7 @@
 		var prod_name = product_list[index]['name'],
 			prod_price = product_list[index]['price'],
 			description = product_list[index]['description'],
-			picture = "<?=base_url('assets/admin/img/gallery/')?>"+product_list[index]['pic'];
+			picture = "<?=base_url('uploads/products/')?>"+product_list[index]['pic'];
 
 		//modal values
 		$('#product-name').text(prod_name);

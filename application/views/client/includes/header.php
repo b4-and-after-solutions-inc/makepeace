@@ -31,6 +31,14 @@
   		  min-width:2em;
   		  font-weight:bold;
   		}
+
+      .def-number-input{
+        display:flex;
+      }
+      .def-number-input button{
+        height: 100%;
+        background-color: #ccd464;
+      }
   	</style>
 
 	<script src="<?=base_url('assets/admin/js/jquery.min.js');?>"></script>
@@ -133,12 +141,13 @@
                     </div>
         				  </span>
                 </div>
-                <div class="rd-navbar-project">
-                  <div class="rd-navbar-project-header">
-                    <h5 class="rd-navbar-project-title">Cart</h5>
+                <div class="rd-navbar-project" style="padding-top: 1rem;">
+                  <div class="rd-navbar-project-header" style="display:flex">
                     <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-close" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
                       <div class="project-close"><span></span><span></span></div>
                     </div>
+                    <h5 class="rd-navbar-project-title">Cart</h5>
+                    <button type="button" class="btn btn-primary btn-sm" style="position:fixed; right:20px; padding: .5em 1.5rem;">Checkout</button>
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
                     <div class="text-right">
@@ -155,7 +164,6 @@
 							</div>
                         </div>
                       </div>
-					  <button type="button" class="btn btn-primary btn-sm">Checkout</button>
                     </div>
                   </div>
                 </div>
