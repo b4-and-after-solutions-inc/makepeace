@@ -2,7 +2,7 @@
 <div class="row m0">
   <div class="col-md-12">
       <h4 class="m0" style="padding-top: 15px">User Account</h4>
-  </div>
+  </div><!-- NOTE Testing Ina mo -->
 </div>
 <div class="row m0" style="padding: 20px">
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
@@ -21,7 +21,7 @@
         <span id='message'></span>
     </div>
 
-    
+
   </div>
 
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
@@ -189,7 +189,7 @@ function get_slider(){
 
 $("#slide_form").on('submit',(function(e) {
   e.preventDefault();
-  var fd = new FormData();    
+  var fd = new FormData();
   fd.append('pic', $('#image')[0].files[0]);
   fd.append('title', $('#slide_title').val());
   fd.append('body', $('#slide_description').val());
