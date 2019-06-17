@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2019 at 11:49 AM
+-- Generation Time: Jun 17, 2019 at 10:12 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -119,7 +119,8 @@ CREATE TABLE `order_header` (
   `contact_number` varchar(20) DEFAULT NULL,
   `email_address` varchar(100) DEFAULT NULL,
   `order_status` int(1) NOT NULL DEFAULT '0',
-  `created_datetime` date DEFAULT NULL
+  `created_datetime` date DEFAULT NULL,
+  `address` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -147,10 +148,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `pic`, `price`, `category_id`, `is_featured`, `createdby_id`, `created_datetime`, `active`) VALUES
 (1, 'Chocolate Cake', 'Cake made with rich chocolate cookie', '8.jpeg', '100.00', 2, 0, NULL, NULL, 1),
-(9, 'Strawberry Cakers', 'Cake made with rich strawberry fillings. So yummy!', '10.jpeg', '120.00', 2, 0, NULL, NULL, 1),
-(10, 'Pan de sal', 'Tagalog ng verb', 'RadBio_Research.PNG', '100.00', 1, 0, NULL, NULL, 0),
+(9, 'Strawberry Cakers', 'Cake made with rich strawberry fillings. So yummy!', '10.jpeg', '120.00', 2, 1, NULL, NULL, 1),
+(10, 'Pan de sal', 'Tagalog ng verb', 'RadBio_Research.PNG', '100.00', 1, 1, NULL, NULL, 1),
 (11, 'Back', 'qwe', 'sidebar_bg.jpg', '123.00', 1, 1, NULL, NULL, 1),
-(12, 'Pandesal', 'Pandesal sa Umaga TAENANG INSERT YAN implement nyo nalang git felms para macentralized sana kaya nga eh hahah install muna ko atom. sige ready na ako omowi! SIGE SIGE BAMBIII SALAMATS!!!!', 'pande.jpg', '3.00', 0, 1, NULL, NULL, 1);
+(12, 'Pandesal', 'Pandesal sa Umaga TAENANG INSERT YAN implement nyo nalang git felms para macentralized sana kaya nga eh hahah install muna ko atom. sige ready na ako omowi! SIGE SIGE BAMBIII SALAMATS!!!!', 'pande.jpg', '3.00', 0, 0, NULL, NULL, 1),
+(13, 'sample', 'sample lang muna', 'sadw.jpg', '1500.00', 2, 1, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -272,7 +274,7 @@ ALTER TABLE `order_header`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `sales`
 --

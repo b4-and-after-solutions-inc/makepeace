@@ -91,5 +91,19 @@ Class records_model extends CI_Model{
 			return 0;
 		}
 	}
+
+	function password_change(){
+		$userEmail=$this->input->post('userEmail');
+		$oldPassword=$this->input->post('oldPassword');
+		$newPassword=$this->input->post('newPassword');
+
+
+		$this->db->set('password', md5($newPassword));
+		$this->db->where('email', $userEmail);
+		$this->db->update('admin');
+		//return $result;	
+		return $this->db->affected_rows();
+		
+	}
 }
 ?>

@@ -8,15 +8,17 @@
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
     <div class="col-md-12">
         <label class="form-control-label">Current Password</label>
-        <input id="oldPassword" type="text" class="form-control">
+        <input id="oldPassword" type="password" class="form-control">
+        <button type="button" class="btn pull-right" onclick="showPassword()"><i class="fa fa-eye"></i></button>
     </div>
     <div class="col-md-12">
         <label class="form-control-label">New Password</label>
-        <input id ="newPassword" type="text" class="form-control">
+        <input id ="newPassword" name="newPassword" type="password" class="form-control">
     </div>
     <div class="col-md-12">
         <label class="form-control-label">Retype New Password</label>
-        <input id="retypenewPassword" type="text" class="form-control">
+        <input id="retypeNewPassword" name="retypeNewPassword" type="password" class="form-control">
+        <span id='message'></span>
     </div>
 
     
@@ -29,7 +31,7 @@
     </div>
     <div class="col-md-12">
         <label class="form-control-label">Email Password</label>
-        <input id="userEmailPassword" type="text" class="form-control">
+        <input id="userEmailPassword" type="password" class="form-control">
     </div>
     <div class="col-md-12 text-right">
         <br>
@@ -97,9 +99,17 @@
     <!-- /.modal-dialog -->
   </div>
 <script>
+
 base_url = '<?php echo base_url()?>';
 $(document).ready(function(){
     get_slider();
+});
+
+$('#password, #confirm_password').on('keyup', function () {
+  if ($('#password').val() == $('#confirm_password').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
 });
 
 function edit_mode(id){
@@ -203,6 +213,43 @@ $("#slide_form").on('submit',(function(e) {
 
 function edit_credentials(){
 
+  var oldPassword =  $('#oldPassword').val();
+  var newPassword =  $('#newPassword').val();
+  var retypePassword =  $('#retypePassword').val();
+  var userEmail =  $('#userEmail').val();
+  var userEmailPassword =  $('#userEmailPassword').val();
 
+  //var newPassword = document.getElementById("newPassword").value;
+  //var retypePassword = document.getElementById("retypeNewPassword").value;
+  //var userEmail = document.getElementById("userEmail").value;
+  //var userEmailPassword = document.getElementById("userEmailPassword").value;
+ 
+  $.ajax({
+    url: base_url + 'Admin/password_change',
+    type: 'POST',
+    
+    data:{
+        oldPassword: oldPassword, 
+        newPassword: newPassword, 
+        retypePassword: retypePassword, 
+        userEmail: userEmail,
+        userEmailPassword: userEmailPassword
+    },
+    dataType : "JSON",
+    
+    success: function(data){
+      $('#modal-default').modal('hide');
+    }
+
+  });
+}
+
+function showPassword() {
+  var x = document.getElementById("oldPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
 }
 </script>
