@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2019 at 10:27 AM
+-- Generation Time: Jun 17, 2019 at 10:47 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -118,9 +118,9 @@ CREATE TABLE `order_header` (
   `customer_name` varchar(100) DEFAULT NULL,
   `contact_number` varchar(20) DEFAULT NULL,
   `email_address` varchar(100) DEFAULT NULL,
+  `address` text NOT NULL,
   `order_status` int(1) NOT NULL DEFAULT '0',
-  `created_datetime` date DEFAULT NULL,
-  `address` text
+  `created_datetime` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
