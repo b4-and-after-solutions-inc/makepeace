@@ -210,7 +210,7 @@ $("#slide_form").on('submit',(function(e) {
     }
   });
 }));
-
+//change password
 function edit_credentials(){
 
   var oldPassword =  $('#oldPassword').val();
@@ -243,7 +243,7 @@ function edit_credentials(){
 
   });
 }
-
+//showing password
 function showPassword() {
   var x = document.getElementById("oldPassword");
   if (x.type === "password") {

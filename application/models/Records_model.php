@@ -91,7 +91,7 @@ Class records_model extends CI_Model{
 			return 0;
 		}
 	}
-
+	//changing password
 	function password_change(){
 		$userEmail=$this->input->post('userEmail');
 		$oldPassword=$this->input->post('oldPassword');

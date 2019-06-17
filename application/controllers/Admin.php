@@ -68,6 +68,7 @@ class Admin extends CI_Controller
         ->set_output(json_encode($this->records_model->get_sliders($this->input->post('id'), 0)));
   }
 
+  //change password
   function password_change(){
     /*$user_credentials = array(
       $this->input->post('oldPassword'),
