@@ -1,4 +1,3 @@
-
       <!-- Swiper-->
       <section class="section swiper-container swiper-slider swiper-slider-2 swiper-slider-3" data-loop="true" data-autoplay="5000" data-simulate-touch="false" data-slide-effect="fade">
         <div class="swiper-wrapper text-sm-left">
@@ -11,7 +10,7 @@
               else {
                 $link = '';
               }
-                echo 
+                echo
                 '<div class="swiper-slide context-dark" data-slide-bg="'. base_url('uploads/slider/') . $s->picture.'">
                   <div class="swiper-slide-caption section-md">
                     <div class="container">
@@ -29,7 +28,7 @@
                 </div>';
           }
           ?>
-          
+
         </div>
         <!-- Swiper Pagination-->
         <div class="swiper-pagination" data-bullet-custom="true"></div>
@@ -251,7 +250,7 @@
         </div>
       </section>
 
-     
+
 
       <!-- Tell-->
       <section class="section section-sm section-first bg-default">

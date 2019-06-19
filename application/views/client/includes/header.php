@@ -146,7 +146,7 @@
                       <div class="project-close"><span></span><span></span></div>
                     </div>
                     <h5 class="rd-navbar-project-title">Cart</h5>
-                    <button type="button" class="btn btn-primary btn-sm" style="position:fixed; right:20px; padding: .5em 1.5rem;">Checkout</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="checkout" style="position:fixed; right:20px; padding: .5em 1.5rem;" onclick="window.location.href='<?=base_url('Bakery/checkout')?>'">Checkout</button>
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
                     <div class="text-right">
@@ -171,3 +171,24 @@
           </nav>
         </div>
       </header>
+      <?php
+        if($nav != "Home"){ ?>
+          <!-- Breadcrumbs -->
+          <section class="bg-gray-7">
+            <div class="breadcrumbs-custom box-transform-wrap context-dark">
+              <div class="container">
+                <h3 class="breadcrumbs-custom-title"><?=$nav;?></h3>
+                <div class="breadcrumbs-custom-decor"></div>
+              </div>
+              <div class="box-transform" style="background-image: url(<?=base_url('assets/');?>images/bg-1.jpg);"></div>
+            </div>
+            <div class="container">
+              <ul class="breadcrumbs-custom-path">
+                <li><a href="<?=base_url();?>">Home</a></li>
+                <li class="active"><?=$nav;?></li>
+              </ul>
+            </div>
+          </section>
+      <?php
+        }
+      ?>

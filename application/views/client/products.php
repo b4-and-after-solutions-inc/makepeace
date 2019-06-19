@@ -1,20 +1,3 @@
-<!-- Breadcrumbs -->
-      <section class="bg-gray-7">
-        <div class="breadcrumbs-custom box-transform-wrap context-dark">
-          <div class="container">
-            <h3 class="breadcrumbs-custom-title"><?=$nav?></h3>
-            <div class="breadcrumbs-custom-decor"></div>
-          </div>
-          <div class="box-transform" style="background-image: url(<?=base_url('assets/');?>images/bg-1.jpg);"></div>
-        </div>
-        <div class="container">
-          <ul class="breadcrumbs-custom-path">
-            <li><a href="index.html">Home</a></li>
-            <li class="active"><?=$nav?></li>
-          </ul>
-        </div>
-      </section>
-
 	  <!-- Our Shop-->
       <section class="section section-lg bg-default">
         <div class="container">
@@ -142,12 +125,20 @@
 
 
 <script>
-	var product_list = <?php echo json_encode($product_list);?>;
-	var cart = new Array();
+	var product_list = <?=json_encode($product_list);?>;
+	var cart = <?=json_encode($_SESSION['cart_details']);?>;
 
+  $(document).ready(function (){
+    //initialize notification bar
+    check_notification();
+    //printing of cart from session
+    for(var i = 0; i < cart.length; i++){
+      var index = product_list.findIndex(product_list => product_list.id == cart[i]['product_details']['id']);
+      print_cart(product_list, cart[i]['quantity'], index);
+    }
+  });
 
 	$(document).on('click', '#view_product',function(){
-
 		var id = $(this).val();
 		var index = product_list.findIndex(product_list => product_list.id == id);
 
@@ -156,7 +147,7 @@
 			description = product_list[index]['description'],
 			picture = "<?=base_url('assets/admin/img/gallery/')?>"+product_list[index]['pic'];
 
-		//modal values
+		//setting the modal values
 		$('#product-name').text(prod_name);
 		$('#product-price').text(prod_price);
 		$('#product-desc').text(description);
@@ -179,17 +170,12 @@
 
 		if(check_cart == -1){
 			cart.push({product_details: product_list[index], quantity: quantity});
+      set_cart_session();
 			print_cart(product_list, quantity, index);
 		}
     check_notification();
 		$('#product_description').modal('hide');
 	});
-
-	function print_cart(cart, quantity, index){
-		var cart_item = "<div class='col-12 row'><div class='col-6 text-left'>"+cart[index]['name']+"</div><div class='col-3 text-left'>"+quantity+"</div><div class='col-3'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true'>&times;</span></button></div></div>";
-
-		$('.cart-list').append(cart_item);
-	}
 
 	$(document).on('click', '.close', function(){
 		var id = $(this).val();
@@ -198,16 +184,34 @@
 		cart.splice(check_cart, 1);
 		$(this).closest('.row').remove();
 
+    set_cart_session();
     check_notification();
 		console.log(cart);
 	});
 
+  function print_cart(cart, quantity, index){
+		var cart_item = "<div class='col-12 row'><div class='col-6 text-left'>"+cart[index]['name']+"</div><div class='col-3 text-left'>"+quantity+"</div><div class='col-3'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true'>&times;</span></button></div></div>";
+
+		$('.cart-list').append(cart_item);
+	}
+
   function check_notification(){
     if(cart.length != 0){
+      $('#checkout').prop('disabled', false);
       $('.has-badge').attr("data-count", cart.length);
     } else {
-      console.log(cart.length);
+      $('#checkout').prop('disabled', true);
       $('.has-badge').removeAttr("data-count");
     }
   };
+
+  function set_cart_session(){
+    $.ajax({
+      type: "POST",
+      url: "<?=base_url('Bakery/set_cart_session')?>",
+      data:{
+        cart: cart
+      }
+    });
+  }
 </script>
