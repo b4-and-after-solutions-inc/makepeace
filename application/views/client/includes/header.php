@@ -88,7 +88,7 @@
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-modern" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="56px" data-xl-stick-up-offset="56px" data-xxl-stick-up-offset="56px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-inner-outer">
+            <div class="rd-navbar-inner-outer" style="background:#cde3f3;">
               <div class="rd-navbar-inner">
                 <!-- RD Navbar Panel-->
                 <div class="rd-navbar-panel">
@@ -151,16 +151,13 @@
                   <div class="rd-navbar-project-content rd-navbar-content">
                     <div class="text-right">
                       <div class="row gutters-20 cart-list" data-lightgallery="group">
-						<div class="col-12 row">
-							<div class="col-6 text-left">
-								Cart Item
-							</div>
-							<div class="col-3 text-left">
-								Quantity
-							</div>
-							<div class="col-3">
-
-							</div>
+            						<div class="col-12 row">
+            							<div class="col-8 text-left">
+            								<b>Cart Item</b>
+            							</div>
+            							<div class="col-3 text-center">
+            								<b>Qty</b>
+            							</div>
                         </div>
                       </div>
                     </div>

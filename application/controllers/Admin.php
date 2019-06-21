@@ -15,7 +15,7 @@ class Admin extends CI_Controller
     else{
          redirect(base_url().'Access/login/', 'refresh');
     }
-    
+
   }
 
   public function settings(){
@@ -78,7 +78,7 @@ class Admin extends CI_Controller
       $this->input->post('userEmailPassword')
     );*/
 
-    $data=$this->records_model->password_change();
+    $data = $this->records_model->password_change();
     echo json_encode($data);
   }
 
