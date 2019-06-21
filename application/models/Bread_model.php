@@ -15,8 +15,8 @@ class Bread_model extends CI_MODEL {
 
 		$order_id = $this->db->insert_id();
 
-		if($result_header){
-			for($i = 0; $i < count($order_details); $i++){
+		if($result_header) {
+			for($i = 0; $i < count($order_details); $i++) {
 				$order_desc = array(
 					"product_id" => $order_details[$i]['product_details']['id'],
 					"quantity" => $order_details[$i]['quantity'],
