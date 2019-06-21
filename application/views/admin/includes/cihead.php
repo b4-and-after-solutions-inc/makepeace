@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><?=$this->config->item('website_name');?></title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<meta name="author" content="JDC, GMT, FDRL">
+<meta name="author" content="JDC, FDRL, EJWP">
 <meta name="application-name" content="<?=$this->config->item('website_name');?>">
 
 <!-- LINKS Start -->
@@ -256,7 +256,7 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
       color: green;
     }
 	.p0{
-		padding:0 !important; 
+		padding:0 !important;
 	}
 	.filter {
 	    position: relative;
@@ -402,9 +402,9 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 		<li class="header">MAIN MENU</li><!-- TODO Dynamic Highlighting of Menu -->
 			<li class="<?=($Menu1=='orders'?'active':'');?>"><a href="<?=base_url();?>Admin/orders"><i class="glyphicon glyphicon-send"></i> <span>Orders</span></a></li>
 			<li class="<?=($Menu1=='Dashboard'?'active':'');?>"><a href="<?=base_url();?>Admin"><i class="glyphicon glyphicon-apple"></i> <span>Products</span></a></li>
-			
+
 			<li class="<?=($Menu1=='settings'?'active':'');?>"><a href="<?=base_url();?>Admin/settings"><i class="glyphicon glyphicon-wrench"></i> <span>Settings</span></a></li>
-		
+
 		</ul>
 	</section>
 </aside>
