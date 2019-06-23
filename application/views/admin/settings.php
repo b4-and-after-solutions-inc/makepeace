@@ -1,15 +1,20 @@
-
+<section class="content container-fluid ">
 <div class="row m0">
-  <div class="col-md-12">
-      <h4 class="m0" style="padding-top: 15px">User Account</h4>
-  </div><!-- NOTE Testing Ina mo -->
+  <div class="col-md-6">
+      <h4 class="m0" style="padding-top: 15px">Admin Password</h4>
+  </div>
+  <div class="col-md-6">
+      <h4 class="m0" style="padding-top: 15px">Logo</h4>
+  </div>
 </div>
 <div class="row m0" style="padding: 20px">
   <div id="user_accoutn" class="m0 sp col-md-4 p0">
     <div class="col-md-12">
         <label class="form-control-label">Current Password</label>
-        <input id="oldPassword" type="password" class="form-control">
-        <button type="button" class="btn pull-right" onclick="showPassword()"><i class="fa fa-eye"></i></button>
+        <div style="display: flex;">
+          <input id="oldPassword" type="password" class="form-control">
+          <button type="button" class="btn pull-right" onclick="showPassword()"><i class="fa fa-eye"></i></button>
+        </div>
     </div>
     <div class="col-md-12">
         <label class="form-control-label">New Password</label>
@@ -17,14 +22,37 @@
     </div>
     <div class="col-md-12">
         <label class="form-control-label">Retype New Password</label>
-        <input id="retypeNewPassword" name="retypeNewPassword" type="password" class="form-control">
+        <input id="retypePassword" name="retypeNewPassword" type="password" class="form-control">
         <span id='message'></span>
     </div>
 
-
+    <div class="col-md-12 text-right">
+        <br>
+        <span id="warning" class="text-danger"></span>
+        <button type="button" class="btn btn-primary text-sm" onclick="edit_credentials()">Save</button>
+    </div>
   </div>
+  <div id="logo" class="m0 sp col-md-2 p0"></div>
+  <div id="logo" class="m0 sp col-md-6 p0">
+    <div class="col-md-6">
+        <img src="<?=$hlogo?>" width="175" style="border: 1px solid #cecaca">
+        <label class="form-control-label">Header Logo</label>
+        <div style="display: flex;">
+          <input id="oldPassword" type="file" class="form-control">
+          <button type="button" class="btn btn-success pull-right" onclick="save()"><i class="fa fa-check"></i></button>
+        </div>
+    </div>
 
-  <div id="user_accoutn" class="m0 sp col-md-4 p0">
+    <div class="col-md-6">
+        <img src="<?=$flogo?>" width="175" style="border: 1px solid #cecaca">
+        <label class="form-control-label">Footer Logo</label>
+        <div style="display: flex;">
+          <input id="oldPassword" type="file" class="form-control">
+          <button type="button" class="btn btn-success pull-right" onclick="save()"><i class="fa fa-check"></i></button>
+        </div>
+    </div>
+  </div>
+  <!-- <div id="user_accoutn" class="m0 sp col-md-4 p0">
     <div class="col-md-12">
         <label class="form-control-label">Email</label>
         <input id="userEmail" type="text" class="form-control" value="ejwpascual@gmail.com" disabled="">
@@ -33,11 +61,7 @@
         <label class="form-control-label">Email Password</label>
         <input id="userEmailPassword" type="password" class="form-control">
     </div>
-    <div class="col-md-12 text-right">
-        <br>
-        <button type="button" class="btn btn-primary text-sm" onclick="edit_credentials()">Save</button>
-    </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="row m0">
@@ -216,32 +240,36 @@ function edit_credentials(){
   var oldPassword =  $('#oldPassword').val();
   var newPassword =  $('#newPassword').val();
   var retypePassword =  $('#retypePassword').val();
-  var userEmail =  $('#userEmail').val();
-  var userEmailPassword =  $('#userEmailPassword').val();
-
-  //var newPassword = document.getElementById("newPassword").value;
-  //var retypePassword = document.getElementById("retypeNewPassword").value;
-  //var userEmail = document.getElementById("userEmail").value;
-  //var userEmailPassword = document.getElementById("userEmailPassword").value;
- 
-  $.ajax({
-    url: base_url + 'Admin/password_change',
-    type: 'POST',
-    
-    data:{
-        oldPassword: oldPassword, 
-        newPassword: newPassword, 
-        retypePassword: retypePassword, 
-        userEmail: userEmail,
-        userEmailPassword: userEmailPassword
-    },
-    dataType : "JSON",
-    
-    success: function(data){
-      $('#modal-default').modal('hide');
-    }
-
-  });
+  console.log(newPassword +'!=' + retypePassword)
+  if(newPassword ==''){
+    $('#warning').text('Please provide your new password'); 
+  }
+  else if(newPassword != retypePassword){
+    $('#warning').text('New passwords do not match');
+  }
+  else {
+    $.ajax({
+      url: base_url + 'Admin/password_change',
+      type: 'POST',
+      
+      data:{
+          oldPassword: oldPassword, 
+          newPassword: newPassword, 
+          retypePassword: retypePassword
+      },
+      dataType : "JSON",
+      
+      success: function(data){
+        if(data == 0){
+            $('#warning').text('Old password incorrect.');
+        } else {
+          location.reload();
+        }
+        
+      }
+    });
+  }
+  
 }
 //showing password
 function showPassword() {

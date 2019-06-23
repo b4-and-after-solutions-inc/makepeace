@@ -19,25 +19,50 @@ class Admin extends CI_Controller
   }
 
   public function settings() {
-    $cihead['Menu1'] = 'settings';
-    $cihead['category'] = $this->records_model->get_categories();
+    if($this->session->userdata('id')) {
+      $cihead['Menu1'] = 'settings';
+      $cihead['hlogo'] = base_url()."uploads/logo/". $this->records_model->get_logo(1);
+      $cihead['flogo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
+      $cihead['category'] = $this->records_model->get_categories();
 
-    $this->load->view('admin/includes/cihead', $cihead);
-    $this->load->view('admin/settings');
-    $this->load->view('admin/includes/cifoot');
+      $this->load->view('admin/includes/cihead', $cihead);
+      $this->load->view('admin/settings');
+      $this->load->view('admin/includes/cifoot');
+     }
+    else {
+      redirect(base_url().'Access/login/', 'refresh');
+    }
   }
 
   public function orders() {
+    if($this->session->userdata('id')) {
     $cihead['Menu1'] = 'orders';
     $cihead['category'] = $this->records_model->get_categories();
 
     $this->load->view('admin/includes/cihead', $cihead);
     $this->load->view('admin/orders');
     $this->load->view('admin/includes/cifoot');
+     }
+    else {
+      redirect(base_url().'Access/login/', 'refresh');
+    }
+  }
+
+  public function delivery() {
+    if($this->session->userdata('id')) {
+      $cihead['Menu1'] = 'Delivery';
+      $cihead['category'] = $this->records_model->get_categories();
+      $this->load->view('admin/includes/cihead', $cihead);
+      $this->load->view('admin/delivery');
+      $this->load->view('admin/includes/cifoot');
+     }
+    else {
+      redirect(base_url().'Access/login/', 'refresh');
+    }
   }
   function get_products() {
     $this->output->set_content_type("application/json")
-    ->set_output(json_encode($this->records_model->get_catalog()));
+    ->set_output(json_encode($this->records_model->get_catalog(1)));
   }
   function get_product() {
     $this->output->set_content_type("application/json")
@@ -53,7 +78,14 @@ class Admin extends CI_Controller
   function get_orders() {
     if($this->session->userdata('id')){
       $this->output->set_content_type("application/json")
-      ->set_output(json_encode($this->records_model->get_orders()));
+      ->set_output(json_encode($this->records_model->get_orders($this->input->post())));
+    }
+    else return 'Unauthorized Access';
+  }
+  function get_order() {
+    if($this->session->userdata('id')){
+      $this->output->set_content_type("application/json")
+      ->set_output(json_encode($this->records_model->get_order($this->input->post('id'))));
     }
     else return 'Unauthorized Access';
   }
@@ -67,17 +99,8 @@ class Admin extends CI_Controller
 
   // Change Password
   function password_change() {
-    /*$user_credentials = array(
-      $this->input->post('oldPassword'),
-      $this->input->post('newPassword'),
-      $this->input->post('retypePassword'),
-      $this->input->post('userEmail'),
-      $this->input->post('userEmailPassword')
-    );*/
-
-    // NOTE Saan galing yung $data? buguk
-    $data = $this->records_model->password_change();
-    echo json_encode($data);
+    $this->output->set_content_type("application/json")
+    ->set_output(json_encode($this->records_model->password_change($this->input->post())));
   }
 
 }

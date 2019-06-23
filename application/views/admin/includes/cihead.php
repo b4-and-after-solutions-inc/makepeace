@@ -393,14 +393,15 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 </style>
 <!-- SIDEBAR Start -->
 <aside class="main-sidebar" style="
-    background: url('<?php echo base_url() ."/assets/img/sb-bg.jpg"?>');
+    background: url('<?php echo base_url() ."/assets/admin/img/sb-bg.jpg"?>');
     background-size: cover;
 "></aside>
 <aside class="main-sidebar" style="background: #01070ad6;">
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header">MAIN MENU</li><!-- TODO Dynamic Highlighting of Menu -->
-			<li class="<?=($Menu1=='orders'?'active':'');?>"><a href="<?=base_url();?>Admin/orders"><i class="glyphicon glyphicon-send"></i> <span>Orders</span></a></li>
+			<li class="<?=($Menu1=='orders'?'active':'');?>"><a href="<?=base_url();?>Admin/orders"><i class="glyphicon glyphicon-shopping-cart"></i> <span>Orders</span></a></li>
+			<li class="<?=($Menu1=='Delivery'?'active':'');?>"><a href="<?=base_url();?>Admin/delivery"><i class="glyphicon glyphicon-send"></i> <span>Deliveries</span></a></li>
 			<li class="<?=($Menu1=='Dashboard'?'active':'');?>"><a href="<?=base_url();?>Admin"><i class="glyphicon glyphicon-apple"></i> <span>Products</span></a></li>
 
 			<li class="<?=($Menu1=='settings'?'active':'');?>"><a href="<?=base_url();?>Admin/settings"><i class="glyphicon glyphicon-wrench"></i> <span>Settings</span></a></li>
@@ -411,7 +412,3 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 <!-- SIDEBAR End -->
 
 <div class="content-wrapper">
-
-
-
-<section class="content container-fluid p0">

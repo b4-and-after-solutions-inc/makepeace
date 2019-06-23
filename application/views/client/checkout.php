@@ -36,10 +36,9 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="form-wrap">
+              <div class="form-wrap"><span style="font-size: 10px;position: absolute;top: -15px;">Mode of payment</span>
                 <select class="form-input" data-minimum-results-for-search="Infinity" data-constraints="@Required">
-                  <option value="1">Mode of Payment</option>
-                  <option value="2">Bank Deposit</option>
+                  <option value="1" selected>Bank Deposit</option>
                 </select>
               </div>
             </div>
@@ -49,6 +48,11 @@
                 <textarea class="form-input textarea-lg" id="notes" name="notes"></textarea>
               </div>
             </div>
+           <!--  <div class="col-12">
+              <div class="form-wrap">
+                  <input type="checkbox" checked name="create_acct" id="create_acct"> Create an account. (This will create you an account so you do not have to enter these details again. Your password will be sent through the specified email.)
+              </div>
+            </div> -->
           </div>
           <button class="button button-secondary button-winona" type="button" id="submit_order">Submit</button>
         </form>
@@ -94,7 +98,7 @@
       <div class="modal-body">
         <div class="col-12 row">
             <p><strong>Ordered Successfully.</strong></p>
-            <p>Please see the email sent for further instruction regarding the placed order.</p>
+            <p>Thank you very much! <br>Please see the email sent at <i id="mail_sent" style="font-weight: bolder;"></i> for further instructions regarding the placed order.</p>
         </div>
       </div>
       <!--footer-->
@@ -117,21 +121,43 @@
       address: $('#address').val(),
       contact: $('#contact').val(),
       email: $('#email').val(),
-      notes: $('#notes').val()
+      notes: $('#notes').val(),
     };
-
-    $.ajax({
-      type: "POST",
-      url: "<?=base_url('Bakery/order');?>",
-      data:{
-        order_header: order_header
-      },
-      success: function(data){
-        if(data == "Success"){
-          $('#orderNotification').modal('show');
+    error = 0;
+    if(order_header['first_name'] == ''){
+      $('#first_name').parent().toggleClass('has-error');
+      error = 1;
+    }
+    if(order_header['last_name'] == ''){
+      $('#last_name').parent().toggleClass('has-error');
+      error = 1;
+    }
+    if(order_header['address'] == ''){
+      $('#address').parent().toggleClass('has-error');
+      error = 1;
+    }
+    if(order_header['contact'] == ''){
+      $('#contact').parent().toggleClass('has-error');
+      error = 1;
+    }
+    if(order_header['email'] == ''){
+      $('#email').parent().toggleClass('has-error');
+      error = 1;
+    }
+    if(error == 0){
+      $.ajax({
+        type: "POST",
+        url: "<?=base_url('Bakery/order');?>",
+        data:{
+          order_header: order_header
+        },
+        success: function(data){
+          if(data == "Success"){
+            $('#mail_sent').text($('#email').val());
+            $('#orderNotification').modal('show');
+          }
         }
-      }
-    });
-
+      });
+    }
   });
 </script>
