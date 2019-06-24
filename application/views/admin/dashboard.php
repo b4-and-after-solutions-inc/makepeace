@@ -104,7 +104,7 @@
         </div>
         <div class="box-body">
           <div class="chart">
-            <canvas id="barChart" style="height:230px"></canvas>
+            <canvas id="pieChart" style="height:230px"></canvas>
           </div>
         </div>
         <!-- /.box-body -->
@@ -125,23 +125,6 @@
         console.log(data);
         if(data != ""){
           printChart(data);
-        }
-        else {
-          $('.chart').append("<div class='row text-center h4'>No Records Founds.</div>")
-        }
-      }
-    });
-  });
-
-  $(document).ready(function(){
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url('admin/get_product_report');?>',
-      returnType: 'json',
-      success: function(data){
-        console.log(data);
-        if(data != ""){
-          pieChart(data);
         }
         else {
           $('.chart').append("<div class='row text-center h4'>No Records Founds.</div>")
@@ -215,8 +198,30 @@ function printChart(dataset){
     barChartOptions.datasetFill = false
     barChart.Bar(barChartData, barChartOptions);
 }
-/*
-function pieChart(dataset){
+
+var productQty = [];
+var productName = [];
+
+$.ajax({
+  type: 'GET',
+  url: '<?php echo base_url('admin/get_product_report');?>',
+  returnType: 'json',
+  success: function(data){
+    console.log(data);
+    if(data != ""){
+      $.each(data, function(key, value) {
+      productQty.push(data[key]['qty']);
+      productName.push(data[key]['product']);
+    });
+    printPie(productName, productQty);
+    }
+    else {
+
+    }
+  }
+});
+
+function printPie(labels, dataset){
 
     //-------------
     //- PIE CHART -
@@ -224,44 +229,18 @@ function pieChart(dataset){
     // Get context with jQuery - using jQuery's .get() method.
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
     var pieChart       = new Chart(pieChartCanvas);
-    var PieData        = [
-      {
-        value    : 700,
-        color    : '#f56954',
-        highlight: '#f56954',
-        label    : 'Chrome'
-      },
-      {
-        value    : 500,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : 'IE'
-      },
-      {
-        value    : 400,
-        color    : '#f39c12',
-        highlight: '#f39c12',
-        label    : 'FireFox'
-      },
-      {
-        value    : 600,
-        color    : '#00c0ef',
-        highlight: '#00c0ef',
-        label    : 'Safari'
-      },
-      {
-        value    : 300,
-        color    : '#3c8dbc',
-        highlight: '#3c8dbc',
-        label    : 'Opera'
-      },
-      {
-        value    : 100,
-        color    : '#d2d6de',
-        highlight: '#d2d6de',
-        label    : 'Navigator'
-      }
-    ]
+    var PieData = [];
+      var color = ['#2778f9', '#ed4d44', '#44ed68', '#00a65a', '#E9967A', '#C0C0C0', '#FF00FF', '#CD5C5C', '#F0FF33', '#33FF60', '#BC33FF', '#D41C94', '#C81744', '#F0301D'];
+      $.each(dataset,function(key,value){
+          var obj = {
+            'value': dataset[key],
+            'label': labels[key],
+            'color': color[key],
+            'highlight': color[key]
+          };
+          PieData.push(obj);
+      });
+      console.log(PieData);
     var pieOptions     = {
       //Boolean - Whether we should show a stroke on each segment
       segmentShowStroke    : true,
@@ -290,6 +269,6 @@ function pieChart(dataset){
     // You can switch between pie and douhnut using the method below.
     pieChart.Doughnut(PieData, pieOptions);
 }
-*/
+
 
 </script>
