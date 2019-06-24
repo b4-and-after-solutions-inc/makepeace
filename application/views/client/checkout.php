@@ -66,7 +66,7 @@
               for($i = 0; $i < count($cart_details); $i++){
                 $total += ($cart_details[$i]['product_details']['price'] * $cart_details[$i]['quantity']);
                 echo '
-                  <div class="col-sm-6 col-lg-12 aside-contacts-item">
+                  <div class="col-12 aside-contacts-item">
                     <p class="aside-contacts-title">'.$cart_details[$i]['product_details']['name'].'</p>
                     <ul class="list-inline contacts-social-list list-inline-sm">
                       <li>Price: &#8369; '.$cart_details[$i]['product_details']['price'].'</li>

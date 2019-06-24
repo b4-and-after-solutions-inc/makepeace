@@ -134,12 +134,16 @@
                     </ul>
                   </div>
                 </div>
-                <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1 mr-3" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
-                  <span class="fa-stack has-badge">
-                    <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
-                    </div>
-        				  </span>
-                </div>
+                <?php
+                  echo ($nav != "Checkout Form") ?
+                  '<div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1 mr-3" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
+                    <span class="fa-stack has-badge">
+                      <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
+                      </div>
+          				  </span>
+                  </div>
+                  ' : '';
+                ?>
                 <div class="rd-navbar-project" style="padding-top: 1rem;">
                   <div class="rd-navbar-project-header" style="display:flex">
                     <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-close" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
@@ -149,14 +153,18 @@
                     <button type="button" class="btn btn-primary btn-sm" id="checkout" style="position:fixed; right:20px; padding: .5em 1.5rem;" onclick="window.location.href='<?=base_url('Bakery/checkout')?>'">Checkout</button>
                   </div>
                   <div class="rd-navbar-project-content rd-navbar-content">
-                    <div class="text-right">
-                      <div class="row gutters-20 cart-list" data-lightgallery="group">
-            						<div class="col-12 row">
-            							<div class="col-8 text-left"><b>Item</b></div>
-            							<div class="col-3 text-center"><b>Qty</b></div>
-                        </div>
-                      </div>
-                    </div>
+                    <table id="cart" class="table table-hover .table-responsive text-left">
+              				<thead class="text-center">
+            						<tr>
+                          <th></th>
+                          <th>Quantity</th>
+              						<th>Product</th>
+            						</tr>
+            					</thead>
+            					<tbody id="cart-list">
+
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -165,7 +173,7 @@
         </div>
       </header>
       <?php
-        if($nav != "Home"){ 
+        if($nav != "Home"){
           if($nav == "About Us"){
             $img ='banner-3.png';
           }

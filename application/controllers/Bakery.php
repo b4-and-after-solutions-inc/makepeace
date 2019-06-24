@@ -5,13 +5,15 @@ class Bakery extends CI_Controller {
 
 	function __construct() {
     parent::__construct();
-  }
+	}
 
 	public function index() {
 		$data['nav'] = "Home";
 		$data['slides'] = $this->records_model->get_sliders($this->input->post('id'), 1);
+		$data['product_list'] = $this->records_model->get_products(0);
 		$data['header_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(1);
 		$data['footer_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
+
 		$this->load->view('client/includes/header', $data);
 		$this->load->view('client/index');
 		$this->load->view('client/includes/footer');
@@ -19,9 +21,10 @@ class Bakery extends CI_Controller {
 
 	public function about_us() {
 		$data['nav'] = "About Us";
-		$data['header_logo'] = $this->records_model->get_logo(1);
-		$data['footer_logo'] = $this->records_model->get_logo(2);
-		
+		$data['product_list'] = $this->records_model->get_products(0);
+		$data['header_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(1);
+		$data['footer_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
+
 		$this->load->view('client/includes/header', $data);
 		$this->load->view('client/about_us');
 		$this->load->view('client/includes/footer');
@@ -45,6 +48,7 @@ class Bakery extends CI_Controller {
 
 	public function contacts() {
 		$data['nav'] = "Contacts";
+		$data['product_list'] = $this->records_model->get_products(0);
 		$data['header_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(1);
 		$data['footer_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
 
@@ -59,8 +63,9 @@ class Bakery extends CI_Controller {
 		} else {
 			$data['nav'] = "Checkout Form";
 			$data['cart_details'] = $_SESSION['cart_details'];
+			$data['product_list'] = $this->records_model->get_products(0);
 			$data['header_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(1);
-		$data['footer_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
+			$data['footer_logo'] = base_url()."uploads/logo/". $this->records_model->get_logo(2);
 
 			$this->load->view('client/includes/header', $data);
 			$this->load->view('client/checkout', $data);
@@ -88,7 +93,7 @@ class Bakery extends CI_Controller {
 	}
 
 	public function destroy_session() {
-		$this->session->sess_destroy();
+		$this->session->sess_destroy('cart_details');
 	}
 	public function cancel(){
 		$mail = $this->records_model->cancel($this->input->post('id'));
@@ -103,13 +108,13 @@ class Bakery extends CI_Controller {
 			    'smtp_port' => 465,
 			    'smtp_user' => 'tchs.sample3@gmail.com',
 			    'smtp_pass' => 'tchs2019',
-			    'mailtype'  => 'html', 
+			    'mailtype'  => 'html',
 			    'charset'   => 'iso-8859-1'
 			);
 			$this->load->library('email', $config);
 			$this->email->set_newline("\r\n");
 			$this->email->from('tchs.sample3@gmail.com', 'Make Peace Bakery');
-	        $this->email->to($mail['email_address']); 
+	        $this->email->to($mail['email_address']);
 			$this->email->subject('Payment Received');
 			$message = "Dear Customer,   <br> <br> &emsp;&emsp;We have received
 			your payment. We will now process your order and expect us to deliver the
@@ -126,7 +131,7 @@ class Bakery extends CI_Controller {
 		    'smtp_port' => 465,
 		    'smtp_user' => 'tchs.sample3@gmail.com',
 		    'smtp_pass' => 'tchs2019',
-		    'mailtype'  => 'html', 
+		    'mailtype'  => 'html',
 		    'charset'   => 'iso-8859-1'
 		);
 		$this->load->library('email', $config);
@@ -164,8 +169,8 @@ class Bakery extends CI_Controller {
 		   </tbody>
 		</table>';
 		$this->email->from('tchs.sample3@gmail.com', 'Make Peace Bakery');
-        $this->email->to($mail); 
-        $message = "Dear Customer,  
+        $this->email->to($mail);
+        $message = "Dear Customer,
         		    <br>
         		    <br>
         		    Your order have been received and will be processed after payment. Order is as follows:
@@ -182,7 +187,7 @@ class Bakery extends CI_Controller {
         		    <br>
 
         		    <p style='text-align: center;font-style: italic;'>Because we are an artisanal bakery, we make sure that your bread/ pastries come to you fresh! We bake in small batches daily and sends out orders through Friday, Saturday!</p>
-        		    <br>";       
+        		    <br>";
 			$this->email->subject('Order Received');
 			$this->email->message($message);
 			$result = $this->email->send();
