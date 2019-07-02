@@ -110,9 +110,9 @@
 							<div>Quantity:</div>
 							<div class="row" style="margin-top:0;">
 								<div class="def-number-input number-input safari_only" style="margin-left:auto; margin-right: auto;">
-								  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+								  <button class="minus"></button>
 								  <input type="number" id="product-quantity" value="1" min="1"/>
-								  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+								  <button class="plus"></button>
 								</div>
 							</div>
 						</div>
@@ -128,80 +128,42 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
 
+  $(document).on('click', '#view_product',function(){
+    var id = $(this).val();
+    var index = product_list.findIndex(product_list => product_list.id == id);
 
-<script>
-	var product_list = <?=json_encode($product_list);?>;
-	var cart = <?=json_encode($_SESSION['cart_details']);?>;
+    var prod_name = product_list[index]['name'],
+      prod_price = product_list[index]['price'],
+      description = product_list[index]['description'],
+      picture = "<?=base_url('uploads/products/')?>"+product_list[index]['pic'];
 
-  $(document).ready(function (){
-    //initialize notification bar
-    check_notification();
-    //printing of cart from session
-    for(var i = 0; i < cart.length; i++){
-      var index = product_list.findIndex(product_list => product_list.id == cart[i]['product_details']['id']);
-      print_cart(product_list, cart[i]['quantity'], index);
-    }
+    //setting the modal values
+    $('#product-name').text(prod_name);
+    $('#product-price').text(prod_price);
+    $('#product-desc').text(description);
+    $('#product-pic').attr('src', picture);
+    $('#product-quantity').val(1);
+    $('#product-add').val(id);
+
+    $('#product_description').modal('show');
   });
 
-	$(document).on('click', '#view_product',function(){
-		var id = $(this).val();
-		var index = product_list.findIndex(product_list => product_list.id == id);
+  $(document).on('click', '#product-add',function(){
+    var id = $(this).val();
 
-		var prod_name = product_list[index]['name'],
-			prod_price = product_list[index]['price'],
-			description = product_list[index]['description'],
-			picture = "<?=base_url('uploads/products/')?>"+product_list[index]['pic'];
+    var index = product_list.findIndex(product_list => product_list.id == id);
+    var check_cart = cart.findIndex(cart => cart.product_details.id == id);
 
-		//setting the modal values
-		$('#product-name').text(prod_name);
-		$('#product-price').text(prod_price);
-		$('#product-desc').text(description);
-		$('#product-pic').attr('src', picture);
-		$('#product-quantity').val(1);
-		$('#product-add').val(id);
+    var quantity = $('#product-quantity').val();
 
-		$('#product_description').modal('show');
-
-
-	});
-
-	$(document).on('click', '#product-add',function(){
-		var id = $(this).val();
-
-		var index = product_list.findIndex(product_list => product_list.id == id);
-		var check_cart = cart.findIndex(cart => cart.product_details.id == id);
-
-		var quantity = $('#product-quantity').val();
-
-		if(check_cart == -1){
-			cart.push({product_details: product_list[index], quantity: quantity});
+    if(check_cart == -1){
+      cart.push({product_details: product_list[index], quantity: quantity});
       set_cart_session();
-			print_cart(product_list, quantity, index);
-		}
+      print_cart(product_list, quantity, index);
+    }
     check_notification();
-		$('#product_description').modal('hide');
-	});
-
-	$(document).on('click', '.close', function(){
-		var id = $(this).val();
-		var check_cart = cart.findIndex(cart => cart.product_details.id == id);
-
-		cart.splice(check_cart, 1);
-		$(this).closest('.row').remove();
-
-    set_cart_session();
-    check_notification();
-		console.log(cart);
-	});
-
-  function set_cart_session(){
-    $.ajax({
-      type: "POST",
-      url: "<?=base_url('Bakery/set_cart_session')?>",
-      data:{
-        cart: cart
-      }
-    });
-  }
+    $('#product_description').modal('hide');
+  });
 </script>

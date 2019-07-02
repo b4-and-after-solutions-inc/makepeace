@@ -13,4 +13,4 @@ $autoload['config'] = array();
 
 $autoload['language'] = array();
 
-$autoload['model'] = array('bread_model', 'records_model', 'user_model');
+$autoload['model'] = array('bread_model', 'records_model', 'user_model', 'dashboard_model');

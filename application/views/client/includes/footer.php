@@ -91,21 +91,81 @@
     <script src="<?=base_url('assets/client/js/core.min.js')?>"></script>
     <script src="<?=base_url('assets/client/js/script.js')?>"></script>
     <!-- coded by Himic-->
-    <script type="text/javascript">
-    function print_cart(cart, quantity, index){
-      var cart_item = "<div class='col-12 row'><div class='col-8 text-left' style=\"padding-left: 20px\">"+cart[index]['name']+"</div><div class='col-3 text-center'>"+quantity+"</div><div class='col-1'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true' style=\"color: #f72e2e\">&times;</span></button></div></div>";
-      $('.cart-list').append(cart_item);
-    }
+    <script>
+      var product_list = <?=json_encode($product_list);?>;
+      var cart = <?=json_encode($_SESSION['cart_details']);?>;
 
-    function check_notification(){
-      if(cart.length != 0){
-        $('#checkout').prop('disabled', false);
-        $('.has-badge').attr("data-count", cart.length);
-      } else {
-        $('#checkout').prop('disabled', true);
-        $('.has-badge').removeAttr("data-count");
+      $(document).ready(function (){
+        //initialize notification bar
+        check_notification();
+        //printing of cart from session
+        for(var i = 0; i < cart.length; i++){
+          var index = product_list.findIndex(product_list => product_list.id == cart[i]['product_details']['id']);
+          print_cart(product_list, cart[i]['quantity'], index);
+        }
+      });
+      $(document).on('click', '.close', function(){
+        var id = $(this).closest('tr').attr('value'),
+            check_cart = cart.findIndex(cart => cart.product_details.id == id);
+
+        cart.splice(check_cart, 1);
+        $(this).closest('tr').css('display', 'none');
+
+        set_cart_session();
+        check_notification();
+      });
+
+      function set_cart_session(){
+        $.ajax({
+          type: "POST",
+          url: "<?=base_url('Bakery/set_cart_session')?>",
+          data:{
+            cart: cart
+          }
+        });
       }
-    };
+
+      function print_cart(cart, quantity, index){
+        var cart_item = "<tr value='"+cart[index]['id']+"'><td><button type='button' class='close'><span aria-hidden='true' style=\'color: #f72e2e\'>&times;</span></button></td><td><div class='row' style='margin-top: -25px;'><div class='def-number-input number-input safari_only' style='margin-left:auto; margin-right: auto;'><button class='plus cart-plus'></button><input type='number' id='cart-quantity' value='"+quantity+"' min='1'/><button class='minus cart-minus'></button></div></div></td><td><h6>"+cart[index]['name']+"</h6><p>&#8369;"+cart[index]['price']+"</p></td></tr>";
+        $('#cart-list').append(cart_item);
+      }
+
+      function check_notification(){
+        if(cart.length != 0){
+          $('#checkout').prop('disabled', false);
+          $('.has-badge').attr("data-count", cart.length);
+        } else {
+          $('#checkout').prop('disabled', true);
+          $('.has-badge').removeAttr("data-count");
+        }
+      };
+
+      //plus and minus button function
+      $(document).on('click', '.plus', function(){
+        this.parentNode.querySelector('input[type=number]').stepUp();
+      });
+
+      $(document).on('click', '.minus', function(){
+        this.parentNode.querySelector('input[type=number]').stepDown();
+      });
+
+      $(document).on('change', '#cart-quantity', function(){
+        update_quantity($(this));
+      });
+
+      $(document).on('click', '.cart-plus, cart-minus', function(){
+        update_quantity($(this).parent().find('#cart-quantity'));
+      });
+
+      function update_quantity(cart_selector){
+        var cart_quantity = cart_selector;
+        var id = cart_quantity.closest('tr').attr('value'),
+            quantity = cart_quantity.val(),
+            check_cart = cart.findIndex(cart => cart.product_details.id == id);
+
+        cart[check_cart]['quantity'] = quantity;
+        set_cart_session();
+      }
     </script>
   </body>
 </html>

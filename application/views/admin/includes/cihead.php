@@ -47,6 +47,7 @@
 
 <script src="<?=base_url('assets/admin/');?>js/Chart.min.js"></script>
 
+
 <script>
 // NOTE What is this shit?
 function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirect to Login
@@ -400,6 +401,7 @@ function logOut() { // TODO LogOut Session Destroy (?) Functionality and Redirec
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 		<li class="header">MAIN MENU</li><!-- TODO Dynamic Highlighting of Menu -->
+			<li class="<?=($Menu1=='dashboard'?'active':'');?>"><a href="<?=base_url();?>Admin/dashboard"><i class="glyphicon glyphicon-signal"></i> <span>Dashboard</span></a></li>
 			<li class="<?=($Menu1=='orders'?'active':'');?>"><a href="<?=base_url();?>Admin/orders"><i class="glyphicon glyphicon-shopping-cart"></i> <span>Orders</span></a></li>
 			<li class="<?=($Menu1=='Delivery'?'active':'');?>"><a href="<?=base_url();?>Admin/delivery"><i class="glyphicon glyphicon-send"></i> <span>Deliveries</span></a></li>
 			<li class="<?=($Menu1=='Dashboard'?'active':'');?>"><a href="<?=base_url();?>Admin"><i class="glyphicon glyphicon-apple"></i> <span>Products</span></a></li>
