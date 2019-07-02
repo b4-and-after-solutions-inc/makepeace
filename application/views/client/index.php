@@ -51,6 +51,7 @@
 */
 .carousel-container {
   display: block;
+  padding-top: 25px;
   height: 500px;
 }
 .my-carousel {
@@ -75,11 +76,13 @@
   background-position: center;
 }
 .product_image{
-  min-width:500px;
-  max-width:500px;
+  min-width:400px;
+  max-width:400px;
 }
 .product_details{
   padding: 25px;
+  padding-top: 0;
+  text-align: left;
 }
 .product_details p{
 }
@@ -155,45 +158,45 @@ strong::after {
         </div>
       </section>
       <!-- What We Offer-->
-      <section class="section section-md bg-default">
+      <section class="section section-md bg-default" style=": #eaf0f5;">
         <div class="container">
           <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Featured Products</span></h3>
+          <a href="<?php echo base_url()?>Bakery/products">View all Products</a>
           <div class="row row-md row-30">
 
           </div>
         </div>
 
         <div class="carousel-container">
-          <div class="carousel my-carousel carousel--thumb">
-            <div class="carousel__slide shown" id="slide1">
-              <div class="product_image">
-                  <img width="500px" src="http://localhost/makepeace/assets/client/images/pandesal-1.png">
-              </div>
-              <div class="product_details">
-                <span>Chocolate Cake 1</span>
-                <p>
-                  "Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-              </div>
-            </div>
-
-            <div class="carousel__slide" id="slide2">
-              <div class="product_image">
-                  <img width="500px" src="choco2.jpg">
-              </div>
-              <div class="product_details">
-                <span>Chocolate Cake 2</span>
-                <p>
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-              </div>
-            </div>
+          <div class="carousel my-carousel carousel--thumb" style="max-width: 1000px;margin: auto;">
+            <?php
+            $ct= 0;
+              foreach($featured as $feat){
+                if($ct == 0){
+                  $s = 'shown';
+                }
+                else{ $s = '';}
+                $ct = 1;
+                echo '<div class="carousel__slide '.$s.'" id="'. $feat->id .'">
+                  <div class="product_image">
+                      <img width="500px" src="'. base_url('uploads/products/'). $feat->pic .'">
+                  </div>
+                  <div class="product_details">
+                    <span>'. $feat->name .'</span>
+                    <p>'.$feat->description.'</p>
+                  </div>
+                </div>';
+              }
+            ?>
           </div>
 
           <div class="carousel__indicators">
-              <label class="carousel__indicator" onclick="featured('slide1')" style="background-image: url('http://localhost/makepeace/assets/client/images/pandesal-1.png');"></label>
-              <label class="carousel__indicator" onclick="featured('slide2')" style="background-image: url('http://localhost/makepeace/assets/client/images/pandesal-1.png');"></label>
-              <label class="carousel__indicator" onclick="featured('slide3')" style="background-image: url('http://localhost/makepeace/assets/client/images/pandesal-1.png');"></label>
+            <?php
+              foreach($featured as $feat){
+                echo '<label class="carousel__indicator" onclick="featured('. $feat->id .')"
+                style="background-image: url(\''. base_url('uploads/products/'). $feat->pic .'\');"></label>';
+              }
+            ?>
           </div>
         </div>
       </section>
@@ -308,3 +311,9 @@ strong::after {
           </div>
         </div>
       </section>
+<script>
+function featured(id){
+        $('.shown').removeClass('shown');
+        $('#'+id).addClass('shown');
+      }
+</script>
