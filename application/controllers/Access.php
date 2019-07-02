@@ -9,7 +9,7 @@ class Access extends CI_Controller{
 		$this->load->view('includes/cihead', $cihead);
 		$this->load->view('errors/html/error_404_lteci');
 		$this->load->view('includes/cifoot');
-  }
+  	}
 
 	public function login(){
 		$this->load->view('admin/login');
@@ -22,5 +22,4 @@ class Access extends CI_Controller{
 		$this->user_model->sign_out();
 		redirect(base_url().'Access/login/', 'refresh');
 	}
-
 }

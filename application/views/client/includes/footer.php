@@ -44,7 +44,7 @@
             <div class="row row-30 align-items-center">
               <div class="col-sm-6 col-md-7 col-lg-4 col-xl-4">
                 <div class="row row-30 align-items-center text-lg-center">
-                  <div class="col-md-7 col-xl-6"><a class="brand" href="index.html"><img src="<?=base_url('assets/client/images/logo.jpg');?>" alt="" width="198" height="66"/></a></div>
+                  <div class="col-md-7 col-xl-6"><a class="brand" href="index.html"><img src="<?=$footer_logo?>" alt="" width="198" height="66"/></a></div>
                   <div class="col-md-5 col-xl-6">
                     <div class="iso-1"><span><img src="<?=base_url('assets/client/images/like-icon-58x25.png');?>" alt="" width="58" height="25"/></span><span class="iso-1-big">9.4k</span></div>
                   </div>
@@ -66,10 +66,8 @@
                   </div>
                   <div class="wow slideInRight">
                     <ul class="list-inline footer-social-list footer-social-list-2 footer-social-list-3">
-                      <li><a class="icon mdi mdi-facebook" href="#"></a></li>
-                      <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                      <li><a class="icon mdi mdi-instagram" href="#"></a></li>
-                      <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+                      <li><a class="icon mdi mdi-facebook" href="https://www.facebook.com/makepeacebakery/" target="__blank"></a></li>
+                      <li><a class="icon mdi mdi-instagram" href="https://www.instagram.com/themakepeacebakery/?hl=en" target="__blank"></a></li>
                     </ul>
                   </div>
                 </div>
@@ -96,5 +94,21 @@
     <script src="<?=base_url('assets/client/js/core.min.js')?>"></script>
     <script src="<?=base_url('assets/client/js/script.js')?>"></script>
     <!-- coded by Himic-->
+    <script type="text/javascript">
+    function print_cart(cart, quantity, index){
+      var cart_item = "<div class='col-12 row'><div class='col-8 text-left' style=\"padding-left: 20px\">"+cart[index]['name']+"</div><div class='col-3 text-center'>"+quantity+"</div><div class='col-1'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true' style=\"color: #f72e2e\">&times;</span></button></div></div>";
+      $('.cart-list').append(cart_item);
+    }
+
+    function check_notification(){
+      if(cart.length != 0){
+        $('#checkout').prop('disabled', false);
+        $('.has-badge').attr("data-count", cart.length);
+      } else {
+        $('#checkout').prop('disabled', true);
+        $('.has-badge').removeAttr("data-count");
+      }
+    };
+    </script>
   </body>
 </html>

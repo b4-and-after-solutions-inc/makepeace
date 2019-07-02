@@ -1,4 +1,4 @@
-
+<section class="content container-fluid p0">
 <div class="row m0">
   <div class="sticky col-md-12">
     <ul class="navbar-nav flex-row">
@@ -26,7 +26,7 @@
 </div>
 <div id="parent" class="row m0 sp col-md-10"> </div>
 <div class="m0 sp col-md-2" >
-  <h5><i class="glyphicon glyphicon-star-empty"></i> <b>Featured Products</b></h5>
+  <h5><b>Featured Products</b></h5>
   <div class="row m0" id="featured" style="display: block;">
   </div>
 </div>
@@ -139,7 +139,7 @@ function edit_mode(id){
       $('#product').val(d.name);
       $('#description').val(d.description);
       $('#price').val(d.price);
-      $('#category').val(d.category);
+      $('#category').val(d.category_id);
       bread.modal_head('Edit <b>' + d.name +'</b>');
       $('#status').show();
       if(d.active == 0){

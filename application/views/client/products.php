@@ -26,8 +26,8 @@
 						echo '
 							<div class="col-sm-6 col-lg-4 col-xl-3">
 							  <!-- Product-->
-							  <article class="product wow fadeInLeft" data-wow-delay=".15s">
-								<div class="product-figure"><img src="'. base_url() .'assets/admin/img/gallery/'.$list->pic.'" alt="" width="161" height="162"/>
+							  <article class="product">
+								<div class="product-figure"><img src="'. base_url() .'uploads/products/'.$list->pic.'" alt="" width="200" height="175"/>
 								</div>
 								<h6 class="product-title">'.$list->name.'</h6>
 								<div class="product-price-wrap">
@@ -45,18 +45,21 @@
 			  </div>
 			  <!--Per Category panel-->
 			  <?php
+
 				foreach($category_list as $catlist){
-          $clean_name = explode(" ", $catlist->category, 2);
+          			$clean_name = explode(" ", $catlist->category, 2);
 					echo '
 						<div class="tab-pane fade" id="'.$clean_name[0].'" role="tabpanel" aria-labelledby="'.$catlist->category.'-tab"><div class="row row-lg row-30">
 					';
+					$m =0;
 					foreach($product_list as $list){
 						if($catlist->id == $list->category_id){
+							$m = 1;
 							echo '
 								<div class="col-sm-6 col-lg-4 col-xl-3">
 								  <!-- Product-->
 								  <article class="product">
-									<div class="product-figure"><img src="'. base_url() .'assets/admin/img/gallery/'.$list->pic.'" alt="" width="161" height="162"/>
+									<div class="product-figure"><img src="'. base_url() .'uploads/products/'.$list->pic.'" alt="" width="200" height="175"/>
 									</div>
 									<h6 class="product-title">'.$list->name.'</h6>
 									<div class="product-price-wrap">
@@ -70,6 +73,7 @@
 							';
 						}
 					}
+					if($m == 0) echo '<p style="width:100%; padding-top:60px"> There are no items to show.</p>';
 					echo '</div></div>';
 				}
 			  ?>
@@ -102,12 +106,14 @@
 							</span>
 						</h6>
 						<p id="product-desc"></p>
-						<div class="row">
-							Quantity:
-							<div class="def-number-input number-input safari_only">
-							  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-							  <input type="number" id="product-quantity" value="1" min="1"/>
-							  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+						<div>
+							<div>Quantity:</div>
+							<div class="row" style="margin-top:0;">
+								<div class="def-number-input number-input safari_only" style="margin-left:auto; margin-right: auto;">
+								  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+								  <input type="number" id="product-quantity" value="1" min="1"/>
+								  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -145,7 +151,7 @@
 		var prod_name = product_list[index]['name'],
 			prod_price = product_list[index]['price'],
 			description = product_list[index]['description'],
-			picture = "<?=base_url('assets/admin/img/gallery/')?>"+product_list[index]['pic'];
+			picture = "<?=base_url('uploads/products/')?>"+product_list[index]['pic'];
 
 		//setting the modal values
 		$('#product-name').text(prod_name);
@@ -188,22 +194,6 @@
     check_notification();
 		console.log(cart);
 	});
-
-  function print_cart(cart, quantity, index){
-		var cart_item = "<div class='col-12 row'><div class='col-6 text-left'>"+cart[index]['name']+"</div><div class='col-3 text-left'>"+quantity+"</div><div class='col-3'><button type='button' class='close' value='"+cart[index]['id']+"'><span aria-hidden='true'>&times;</span></button></div></div>";
-
-		$('.cart-list').append(cart_item);
-	}
-
-  function check_notification(){
-    if(cart.length != 0){
-      $('#checkout').prop('disabled', false);
-      $('.has-badge').attr("data-count", cart.length);
-    } else {
-      $('#checkout').prop('disabled', true);
-      $('.has-badge').removeAttr("data-count");
-    }
-  };
 
   function set_cart_session(){
     $.ajax({

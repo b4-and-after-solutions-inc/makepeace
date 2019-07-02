@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <link rel="icon" href="<?=base_url('assets/client/images/favicon.ico')?>" type="image/x-icon">
+    <link rel="icon" href="<?=base_url('uploads/logo/icon.ico')?>" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,600,700,900%7CRaleway:500">
     <link rel="stylesheet" href="<?=base_url('assets/client/css/bootstrap.css')?>">
@@ -95,7 +95,7 @@
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="<?=base_url('assets/client/images/logo.jpg');?>" alt="" width="198" height="66"/></a></div>
+                  <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="<?=$header_logo?>" alt="" width="198" height="66"/></a></div>
                 </div>
                 <div class="rd-navbar-right rd-navbar-nav-wrap">
                   <div class="rd-navbar-aside">
@@ -152,12 +152,8 @@
                     <div class="text-right">
                       <div class="row gutters-20 cart-list" data-lightgallery="group">
             						<div class="col-12 row">
-            							<div class="col-8 text-left">
-            								<b>Cart Item</b>
-            							</div>
-            							<div class="col-3 text-center">
-            								<b>Qty</b>
-            							</div>
+            							<div class="col-8 text-left"><b>Item</b></div>
+            							<div class="col-3 text-center"><b>Qty</b></div>
                         </div>
                       </div>
                     </div>
@@ -169,7 +165,17 @@
         </div>
       </header>
       <?php
-        if($nav != "Home"){ ?>
+        if($nav != "Home"){
+          if($nav == "About Us"){
+            $img ='banner-3.png';
+          }
+          else if($nav == 'Products'){
+            $img ='bg-1.jpg';
+          } else {
+              $img ='';
+          }
+          ?>
+
           <!-- Breadcrumbs -->
           <section class="bg-gray-7">
             <div class="breadcrumbs-custom box-transform-wrap context-dark">
@@ -177,7 +183,8 @@
                 <h3 class="breadcrumbs-custom-title"><?=$nav;?></h3>
                 <div class="breadcrumbs-custom-decor"></div>
               </div>
-              <div class="box-transform" style="background-image: url(<?=base_url('assets/');?>images/bg-1.jpg);"></div>
+              <div class="box-transform" style="background-image: url(<?=base_url('assets/images/' . $img);?>); opacity:0.2"></div>
+
             </div>
             <div class="container">
               <ul class="breadcrumbs-custom-path">
