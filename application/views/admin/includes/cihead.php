@@ -47,6 +47,11 @@
 
 <script src="<?=base_url('assets/admin/');?>js/Chart.min.js"></script>
 
+<script src="<?=base_url('assets/admin/');?>js/echarts.min.js"></script>
+<script src="<?=base_url('assets/admin/');?>js/ecStat.min.js"></script>
+<script src="<?=base_url('assets/admin/');?>js/extension/dataTool.min.js"></script>
+<script src="<?=base_url('assets/admin/');?>js/extension/bmap.min.js"></script>
+<script src="<?=base_url('assets/admin/');?>js/simplex.js"></script>
 
 <script>
 // NOTE What is this shit?

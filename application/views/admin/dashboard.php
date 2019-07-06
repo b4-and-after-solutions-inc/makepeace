@@ -72,20 +72,9 @@
   <div class="row">
     <section class="col-lg-6 connectedSortable">
       <div class="box box-success">
-        <div class="box-header with-border">
-          <h3 class="box-title">Total Items Delivered Per Month</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          <div class="chart">
-            <canvas id="barChart" style="height:230px"></canvas>
-          </div>
-        </div>
+        <!--for Bar Graph-->
+        <div id="bar" style="width: 600px;height:400px;"></div>
+        
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
@@ -93,20 +82,9 @@
 
     <section class="col-lg-6 connectedSortable">
       <div class="box box-success">
-        <div class="box-header with-border">
-          <h3 class="box-title">Items Delivered</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          <div class="chart">
-            <canvas id="pieChart" style="height:230px"></canvas>
-          </div>
-        </div>
+        <!--for Bar Graph-->
+        <div id="pie" style="width: 600px;height:400px;"></div>
+        
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
@@ -114,93 +92,62 @@
   </div>
 
 </section>
+<script type="text/javascript">
+var delivery_date = [];
+var quantity = [];
 
-<script>
-  $(document).ready(function(){
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url('admin/get_sales_report');?>',
-      returnType: 'json',
-      success: function(data){
-        console.log(data);
-        if(data != ""){
-          printChart(data);
-        }
-        else {
-          $('.chart').append("<div class='row text-center h4'>No Records Founds.</div>")
-        }
-      }
+$.ajax({
+  type: 'GET',
+  url: '<?php echo base_url('admin/get_sales_report');?>',
+  returnType: 'json',
+  success: function(data){
+    console.log(data);
+    if(data != ""){
+      $.each(data, function(key, value) {
+      delivery_date.push(data[key]['delivery_date']);
+      quantity.push(data[key]['qty']);
     });
-  });
-
-function printChart(dataset){
-    var chartLabels = new Array(),
-        chartDatasets = new Array(),
-        dataCeption = new Array();
-
-    for(var i = 0; i < dataset.length; i++){
-      chartLabels.push(dataset[i]['delivery_date']);
-      chartDatasets.push(dataset[i]['qty']);
+    bargraph(delivery_date, quantity);
+    }
+    else {
 
     }
+  }
+});
 
-    var areaChartData = {
-      labels  : chartLabels,
-      datasets: [
-        {
-          label               : 'Total',
-          fillColor           : 'rgba(200, 200, 200, 1)',
-          strokeColor         : 'rgba(200, 200, 200, 1)',
-          pointColor          : 'rgba(200, 200, 200, 1)',
-          pointStrokeColor    : 'rgba(200, 200, 200, 1)',
-          pointHighlightFill  : 'rgba(200, 200, 200, 1)',
-          pointHighlightStroke: 'rgba(200, 200, 200, 1)',
-          data                : chartDatasets
-        }
-      ]
-    };
 
-    //-------------
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas   = $('#barChart').get(0).getContext('2d')
-    var barChart         = new Chart(barChartCanvas)
-    var barChartData     = areaChartData
+function bargraph(labels, dataset){
+  // based on prepared DOM, initialize echarts instance
+  var myChart = echarts.init(document.getElementById('bar'));
 
-    var barChartOptions  = {
-      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-      scaleBeginAtZero        : true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines      : true,
-      //String - Colour of the grid lines
-      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-      //Number - Width of the grid lines
-      scaleGridLineWidth      : 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines  : true,
-      //Boolean - If there is a stroke on each bar
-      barShowStroke           : true,
-      //Number - Pixel width of the bar stroke
-      barStrokeWidth          : 2,
-      //Number - Spacing between each of the X value sets
-      barValueSpacing         : 5,
-      //Number - Spacing between data sets within X values
-      barDatasetSpacing       : 1,
-      //String - A legend template
-      legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-      //Boolean - whether to make the chart responsive
-      responsive              : true,
-      maintainAspectRatio     : true
-    }
+  // specify chart configuration item and data
+  var option = {
+      title: {
+          text: 'Total Items Delivered'
+      },
+      tooltip: {},
+      legend: {
+          data:['Delivered']
+      },
+      xAxis: {
+          data: labels
+      },
+      yAxis: {},
+      series: [{
+          name: 'Delivered',
+          type: 'bar',
+          data: dataset 
+      }]
+  };
 
-    barChartOptions.datasetFill = false
-    barChart.Bar(barChartData, barChartOptions);
+  // use configuration item and data specified to show chart
+  myChart.setOption(option);
+
 }
 
-var productQty = [];
-var productName = [];
+
+var productName = [],
+    productQty = [];
 
 $.ajax({
   type: 'GET',
@@ -210,65 +157,76 @@ $.ajax({
     console.log(data);
     if(data != ""){
       $.each(data, function(key, value) {
-      productQty.push(data[key]['qty']);
-      productName.push(data[key]['product']);
-    });
-    printPie(productName, productQty);
+        productName.push(data[key]['product']);
+        productQty.push(data[key]['qty']);
+      });
+      piegraph(productName, productQty);
     }
     else {
-
+      alert("no data");
     }
   }
 });
 
-function printPie(labels, dataset){
+function piegraph(product, quantity){
+  //initialize ng lalagyan ng 2 dime array para sa data
+  var chart_data = [];
 
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-    var pieChart       = new Chart(pieChartCanvas);
-    var PieData = [];
-      var color = ['#2778f9', '#ed4d44', '#44ed68', '#00a65a', '#E9967A', '#C0C0C0', '#FF00FF', '#CD5C5C', '#F0FF33', '#33FF60', '#BC33FF', '#D41C94', '#C81744', '#F0301D'];
-      $.each(dataset,function(key,value){
-          var obj = {
-            'value': dataset[key],
-            'label': labels[key],
-            'color': color[key],
-            'highlight': color[key]
-          };
-          PieData.push(obj);
-      });
-      console.log(PieData);
-    var pieOptions     = {
-      //Boolean - Whether we should show a stroke on each segment
-      segmentShowStroke    : true,
-      //String - The colour of each segment stroke
-      segmentStrokeColor   : '#fff',
-      //Number - The width of each segment stroke
-      segmentStrokeWidth   : 2,
-      //Number - The percentage of the chart that we cut out of the middle
-      percentageInnerCutout: 50, // This is 0 for Pie charts
-      //Number - Amount of animation steps
-      animationSteps       : 100,
-      //String - Animation easing effect
-      animationEasing      : 'easeOutBounce',
-      //Boolean - Whether we animate the rotation of the Doughnut
-      animateRotate        : true,
-      //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale         : false,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive           : true,
-      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio  : true,
-      //String - A legend template
-      legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    pieChart.Doughnut(PieData, pieOptions);
+  $.each(product, function(key, value) {
+    //assign ng data per row dun sa format ng chart data 
+    var row = {value: quantity[key], name: product[key]};
+    //push yung data na na-format na tatanggapin ng chart
+    chart_data.push(row);
+  });
+  console.log(chart_data);
+  var dom = document.getElementById("pie");
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = null;
+  app.title = 'Product';
+
+  option = {
+      tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+      },
+      legend: {
+          orient: 'vertical',
+          x: 'left',
+          data: product
+      },
+      series: [
+          {
+              name:'Product',
+              type:'pie',
+              radius: ['50%', '70%'],
+              avoidLabelOverlap: false,
+              label: {
+                  normal: {
+                      show: false,
+                      position: 'center'
+                  },
+                  emphasis: {
+                      show: true,
+                      textStyle: {
+                          fontSize: '30',
+                          fontWeight: 'bold'
+                      }
+                  }
+              },
+              labelLine: {
+                  normal: {
+                      show: false
+                  }
+              },
+              //bigay value dun sa data
+              data: chart_data
+          }
+      ]
+  };
+  ;
+  if (option && typeof option === "object") {
+      myChart.setOption(option, true);
+  }
 }
-
-
 </script>

@@ -129,7 +129,7 @@ class Admin extends CI_Controller
   }
 
   //get sales report
-
+  //bar graph
   public function get_sales_report(){
     $data = $this->dashboard_model->get_sales_report();
     header('Content-Type: application/json');
