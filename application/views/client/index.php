@@ -1,4 +1,115 @@
-      <!-- Swiper-->
+<style type="text/css">
+  @import url("https://fonts.googleapis.com/css?family=Roboto:900");
+/**
+  * style variables
+*/
+/**
+  * Control & indicator mixin
+*/
+.carousel {
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  list-style: none;
+}
+
+.carousel__indicators {
+  /*position: absolute;*/
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+.carousel__indicator {
+  height: 80px;
+  width: 80px;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel__indicator:hover {
+  opacity: 0.75;
+}
+.carousel--scale .carousel__slide {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.carousel__slide {
+  height: 100%;
+  position: absolute;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+}
+/**
+  * Theming
+*/
+.carousel-container {
+  display: block;
+  padding-top: 25px;
+  height: 500px;
+}
+.my-carousel {
+  border-radius: 5px;
+  margin: 30px;
+}
+.carousel__slide {
+ /* overflow: hidden;
+  width: 1000px;*/
+}
+.carousel--thumb .carousel__indicator {
+  height: 50px;
+  width: 50px;
+}
+.carousel__indicator {
+  background-color: #fafafa;
+  background-size: cover;
+}
+.carousel__slide,
+.carousel--thumb .carousel__indicators .carousel__indicator{
+  background-size: cover;
+  background-position: center;
+}
+.product_image{
+  min-width:400px;
+  max-width:400px;
+}
+.product_details{
+  padding: 25px;
+  padding-top: 0;
+  text-align: left;
+}
+.product_details p{
+}
+.shown{
+  opacity: 1 !important;
+}
+
+.product_details > span{
+  font-size:35px;
+}
+strong {
+  position: relative;
+}
+strong::after {
+  content: '';
+  position: absolute;
+  bottom: -0.35rem;
+  left: -0.2rem;
+  right: -0.2rem;
+  height: 0.75rem;
+  z-index: 0;
+  background-image: url("underline.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+<!-- Swiper-->
       <section class="section swiper-container swiper-slider swiper-slider-2 swiper-slider-3" data-loop="true" data-autoplay="5000" data-simulate-touch="false" data-slide-effect="fade">
         <div class="swiper-wrapper text-sm-left">
 
@@ -47,130 +158,45 @@
         </div>
       </section>
       <!-- What We Offer-->
-      <section class="section section-md bg-default">
+      <section class="section section-md bg-default" style=": #eaf0f5;">
         <div class="container">
-          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Our Menu</span></h3>
+          <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Featured Products</span></h3>
+          <a href="<?php echo base_url()?>Bakery/products">View all Products</a>
           <div class="row row-md row-30">
-            <div class="col-sm-6 col-lg-4">
-              <div class="oh-desktop">
-                <!-- Services Terri-->
-                <article class="services-terri wow slideInUp">
-                  <div class="services-terri-figure"><img src="<?=base_url('assets/client/')?>images/pandesal-1.png" alt="" width="370" height="278"/>
-                  </div>
-                  <div class="services-terri-caption"><span class="services-terri-icon linearicons-bread"></span>
-                    <h5 class="services-terri-title"><a href="#">Breads</a></h5>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-              <div class="oh-desktop">
-                <!-- Services Terri-->
-                <article class="services-terri wow slideInDown">
-                  <div class="services-terri-figure"><img src="<?=base_url('assets/client/')?>images/cookies-2.png" alt="" width="370" height="278"/>
-                  </div>
-                  <div class="services-terri-caption"><span class="services-terri-icon linearicons-hamburger"></span>
-                    <h5 class="services-terri-title"><a href="#">Cookies</a></h5>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-              <div class="oh-desktop">
-                <!-- Services Terri-->
-                <article class="services-terri wow slideInUp">
-                  <div class="services-terri-figure"><img src="<?=base_url('assets/client/')?>images/choco-cake-3.png" alt="" width="370" height="278"/>
-                  </div>
-                  <div class="services-terri-caption"><span class="services-terri-icon linearicons-cake"></span>
-                    <h5 class="services-terri-title"><a href="#">Cakes</a></h5>
-                  </div>
-                </article>
-              </div>
-            </div>
+
           </div>
         </div>
-      </section>
 
-       <section class="section section-last bg-default">
-        <div class="container-fluid container-inset-0 isotope-wrap">
-          <div class="row row-10 gutters-10 isotope" data-isotope-layout="masonry" data-isotope-group="gallery" data-lightgallery="group">
-            <div class="col-xs-6 col-sm-4 col-xl-2 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-2 wow slideInLeft"><a class="thumbnail-mary-figure" href="images/gallery-1-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-1-310x585.jpg" alt="" width="310" height="585"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">Best Ingredients</a></h6>
-                    <div class="thumbnail-mary-location">Tasty Pizza</div>
+        <div class="carousel-container">
+          <div class="carousel my-carousel carousel--thumb" style="max-width: 1000px;margin: auto;">
+            <?php
+            $ct= 0;
+              foreach($featured as $feat){
+                if($ct == 0){
+                  $s = 'shown';
+                }
+                else{ $s = '';}
+                $ct = 1;
+                echo '<div class="carousel__slide '.$s.'" id="'. $feat->id .'">
+                  <div class="product_image">
+                      <img width="500px" src="'. base_url('uploads/products/'). $feat->pic .'">
                   </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-8 col-xl-4 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-big wow slideInRight"><a class="thumbnail-mary-figure" href="images/gallery-2-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-2-631x587.jpg" alt="" width="631" height="587"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">Comfortable interior</a></h6>
-                    <div class="thumbnail-mary-location">Modern Design</div>
+                  <div class="product_details">
+                    <span>'. $feat->name .'</span>
+                    <p>'.$feat->description.'</p>
                   </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-xl-2 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-2 wow slideInDown"><a class="thumbnail-mary-figure" href="images/gallery-3-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-3-311x289.jpg" alt="" width="311" height="289"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">quality Dishware</a></h6>
-                    <div class="thumbnail-mary-location">Top-notch utensils</div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-8 col-xl-4 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary wow slideInUp"><a class="thumbnail-mary-figure" href="images/gallery-4-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-4-631x289.jpg" alt="" width="631" height="289"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">Refreshing cocktails</a></h6>
-                    <div class="thumbnail-mary-location">Exclusive selection</div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-xl-2 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-2 wow slideInUp"><a class="thumbnail-mary-figure" href="images/gallery-5-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-5-311x289.jpg" alt="" width="311" height="289"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">Exotic Salads</a></h6>
-                    <div class="thumbnail-mary-location">Summer Taste</div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-xl-2 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-2 wow slideInRight"><a class="thumbnail-mary-figure" href="images/gallery-6-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-6-311x289.jpg" alt="" width="311" height="289"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">All Types of pizza</a></h6>
-                    <div class="thumbnail-mary-location">Special Recipes</div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-xs-6 col-sm-4 col-xl-2 isotope-item oh-desktop">
-              <!-- Thumbnail Mary-->
-              <article class="thumbnail thumbnail-mary thumbnail-mary-2 wow slideInLeft"><a class="thumbnail-mary-figure" href="images/gallery-7-1200x800-original.jpg" data-lightgallery="item"><img src="<?=base_url('assets/client/')?>images/gallery-7-311x289.jpg" alt="" width="311" height="289"/></a>
-                <div class="thumbnail-mary-caption">
-                  <div>
-                    <h6 class="thumbnail-mary-title"><a href="#">Diverse menu</a></h6>
-                    <div class="thumbnail-mary-location">Pick Your Favorite dish</div>
-                  </div>
-                </div>
-              </article>
-            </div>
+                </div>';
+              }
+            ?>
+          </div>
+
+          <div class="carousel__indicators">
+            <?php
+              foreach($featured as $feat){
+                echo '<label class="carousel__indicator" onclick="featured('. $feat->id .')"
+                style="background-image: url(\''. base_url('uploads/products/'). $feat->pic .'\');"></label>';
+              }
+            ?>
           </div>
         </div>
       </section>
@@ -250,57 +276,6 @@
         </div>
       </section>
 
-
-
-      <!-- Tell-->
-      <section class="section section-sm section-first bg-default">
-        <div class="container">
-          <h3 class="heading-3">Book your Table</h3>
-          <form class="rd-form rd-mailform form-style-1" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-            <div class="row row-20 gutters-20">
-              <div class="col-md-6 col-lg-4 oh-desktop">
-                <div class="form-wrap wow slideInDown">
-                  <input class="form-input" id="contact-your-name-6" type="text" name="name" data-constraints="@Required">
-                  <label class="form-label" for="contact-your-name-6">Your Name*</label>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 oh-desktop">
-                <div class="form-wrap wow slideInUp">
-                  <input class="form-input" id="contact-email-6" type="email" name="email" data-constraints="@Email @Required">
-                  <label class="form-label" for="contact-email-6">Your E-mail*</label>
-                </div>
-              </div>
-              <div class="col-lg-4 oh-desktop">
-                <div class="form-wrap wow slideInDown">
-                  <!--Select 2-->
-                  <select class="form-input" data-minimum-results-for-search="Infinity" data-constraints="@Required">
-                    <option value="1">Select a Service</option>
-                    <option value="2">Dine-In</option>
-                    <option value="3">Carry-Out</option>
-                    <option value="4">Event Catering</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-wrap wow fadeIn">
-                  <label class="form-label" for="contact-message-6">Message</label>
-                  <textarea class="form-input textarea-lg" id="contact-message-6" name="message" data-constraints="@Required"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="group-custom-1 group-middle oh-desktop">
-              <button class="button button-lg button-primary button-winona wow fadeInRight" type="submit">Send message</button>
-              <!-- Quote Classic-->
-              <article class="quote-classic quote-classic-3 wow slideInDown">
-                <div class="quote-classic-text">
-                  <p class="q">Please reserve your table at least 1 day in advance.</p>
-                </div>
-              </article>
-            </div>
-          </form>
-        </div>
-      </section>
-
       <!-- Section Services  Last section-->
       <section class="section section-sm bg-default">
         <div class="container">
@@ -336,3 +311,9 @@
           </div>
         </div>
       </section>
+<script>
+function featured(id){
+        $('.shown').removeClass('shown');
+        $('#'+id).addClass('shown');
+      }
+</script>

@@ -28,14 +28,14 @@ Class Dashboard_model extends CI_Model{
 	    return $query->result();            
 	}
 	*/
-
+	//for bar graph
 	function get_sales_report(){
 		$user_id = $this->session->userdata('id');
 		$query = "SELECT DISTINCT DATE_FORMAT(oh.delivery_date, '%M') as delivery_date, SUM(od.quantity) AS qty FROM order_header as oh inner join order_details as od on oh.id = od.order_id WHERE oh.delivery_date IS NOT NULL GROUP BY oh.delivery_date ";
 		$row = $this->db->query($query);
 		return $row->result_array();
 	}
-
+	//for pie graph
 	function get_product_report(){
 		$user_id = $this->session->userdata('id');
 		$query = "SELECT DISTINCT od.item as product, SUM(od.quantity) AS qty FROM order_header as oh inner join order_details as od on oh.id = od.order_id WHERE oh.delivery_date IS NOT NULL GROUP BY od.item ";

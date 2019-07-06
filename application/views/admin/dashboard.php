@@ -169,7 +169,7 @@ $.ajax({
 });
 
 function piegraph(product, quantity){
-  //initialize ng lalagyan ng 2 dime array para sa data
+  //initialize
   var chart_data = [];
 
   $.each(product, function(key, value) {
